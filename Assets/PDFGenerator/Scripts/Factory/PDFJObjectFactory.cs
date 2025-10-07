@@ -63,8 +63,13 @@ namespace Project.PDFGenerator
 		}
 		#endregion
 
-		#region AddList (TODO)
-		//TODO
+		#region AddList
+		public PDFListData AddList()
+		{
+			var data = new PDFListData(this);
+			m_Datas.Add(data);
+			return data;
+		}
 		#endregion
 
 		#region AddTable (TODO)
