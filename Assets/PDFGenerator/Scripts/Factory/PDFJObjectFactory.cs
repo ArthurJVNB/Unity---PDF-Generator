@@ -1,6 +1,6 @@
-using System;
 using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
+using UnityEngine;
 
 namespace Project.PDFGenerator
 {
@@ -20,26 +20,34 @@ namespace Project.PDFGenerator
 			m_Datas = new List<BasePDFData>();
 		}
 
-		public PDFTextData AddText(float x, float y)
-		{
-			return (PDFTextData)AddText().SetPosition(x, y);
-		}
-
+		#region AddText
 		public PDFTextData AddText()
 		{
 			var data = new PDFTextData(this);
 			m_Datas.Add(data);
 			return data;
 		}
+		#endregion
 
+		#region AddImage
 		public PDFImageData AddImage(string url)
 		{
 			return AddImage().SetUrl(url);
 		}
 
+		public PDFImageData AddImage(string url, Rect rect)
+		{
+			return AddImage(url).SetPosition(rect.x, rect.y).SetSize(rect.width, rect.height);
+		}
+
+		public PDFImageData AddImage(Rect rect)
+		{
+			return AddImage().SetPosition(rect.x, rect.y).SetSize(rect.width, rect.height);
+		}
+
 		public PDFImageData AddImage(float x, float y)
 		{
-			return (PDFImageData)AddImage().SetPosition(x, y);
+			return AddImage().SetPosition(x, y);
 		}
 
 		public PDFImageData AddImage()
@@ -48,6 +56,15 @@ namespace Project.PDFGenerator
 			m_Datas.Add(data);
 			return data;
 		}
+		#endregion
+
+		#region AddList (TODO)
+		//TODO
+		#endregion
+
+		#region AddTable (TODO)
+		//TODO
+		#endregion
 
 		public (JObject page, JObject[] content) Create()
 		{
