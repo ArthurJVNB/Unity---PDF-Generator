@@ -101,6 +101,7 @@ namespace Project.PDFGenerator
 		//}
 		#endregion
 		
+		public TextStyleData(PDFTextData parent) : base(parent) { }
 		public TextStyleData(PDFTextData parent, int fontSize) : base(parent, fontSize) { }
 	}
 }

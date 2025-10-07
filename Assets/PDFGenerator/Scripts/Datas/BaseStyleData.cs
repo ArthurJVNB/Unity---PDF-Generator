@@ -25,9 +25,10 @@ namespace Project.PDFGenerator
 
 		protected TParent _parent;
 
-		protected BaseStyleData(TParent parent)
+		public BaseStyleData(TParent parent)
 		{
 			_parent = parent;
+			this.fontSize = PDFConstants.k_DefaultFontSize;
 		}
 
 		public BaseStyleData(TParent parent, int fontSize) : this(parent)

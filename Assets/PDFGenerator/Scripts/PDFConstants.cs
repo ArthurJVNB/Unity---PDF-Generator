@@ -9,5 +9,6 @@ namespace Project.PDFGenerator
         public const string k_ListType = "list";
         public const string k_TableType = "table";
 		public const string k_Pixel = "px";
+        public const int k_DefaultFontSize = 12;
 	}
 }

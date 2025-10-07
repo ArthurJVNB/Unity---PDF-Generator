@@ -5,6 +5,7 @@ namespace Project.PDFGenerator
 	[Serializable]
 	public class ListStyleData : BaseStyleData<PDFListData>
 	{
+		public ListStyleData(PDFListData parent) : base(parent) { }
 		public ListStyleData(PDFListData parent, int fontSize) : base(parent, fontSize) { }
 	}
 }
