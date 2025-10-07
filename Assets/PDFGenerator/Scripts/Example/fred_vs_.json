@@ -1,0 +1,117 @@
+{
+  "page": {
+    "size": "A4",
+    "orientation": "portrait",
+    "margins": {
+      "top": 40,
+      "right": 40,
+      "bottom": 40,
+      "left": 40
+    }
+  },
+  "content": [
+    {
+      "type": "title",
+      "text": "Relatório de Vendas - Outubro 2025",
+      "style": {
+        "text-align": "center",
+        "color": "#2E86C1",
+        "font-size": "26px",
+        "margin-bottom": "25px",
+        "font-weight": "bold"
+      }
+    },
+    {
+      "type": "paragraph",
+      "text": "Este relatório foi gerado automaticamente via Unity + PHP, demonstrando a integração entre as plataformas para gerar documentos PDF dinâmicos.",
+      "style": {
+        "font-size": "14px",
+        "margin-bottom": "15px",
+        "text-align": "justify",
+        "line-height": "1.4"
+      }
+    },
+    {
+      "type": "image",
+      "src": "http://www.propixelgames.online/pdf/images/icon.png",
+      "style": {
+        "display": "block",
+        "margin": "10px auto",
+        "width": "120px",
+        "height": "120px"
+      }
+    },
+    {
+      "type": "subtitle",
+      "text": "Resumo Geral",
+      "style": {
+        "font-size": "18px",
+        "color": "#1B4F72",
+        "margin-top": "25px",
+        "margin-bottom": "10px",
+        "font-weight": "bold"
+      }
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "items": [
+        "Período: 01 a 30 de Outubro de 2025",
+        "Total de pedidos: 34",
+        "Clientes atendidos: 29",
+        "Lucro bruto: R$ 47.500,00"
+      ],
+      "style": {
+        "font-size": "13px",
+        "margin-bottom": "20px"
+      }
+    },
+    {
+      "type": "table",
+      "header": ["Produto", "Quantidade", "Preço Unitário", "Total"],
+      "rows": [
+        ["Nintendo Switch", "10", "R$2.000", "R$20.000"],
+        ["Smash Bros Ultimate", "5", "R$400", "R$2.000"],
+        ["Pro Controller", "8", "R$300", "R$2.400"],
+        ["Zelda Tears of the Kingdom", "6", "R$450", "R$2.700"],
+        ["Amiibo Mario", "12", "R$180", "R$2.160"]
+      ],
+      "style": {
+        "width": "100%",
+        "border": "1px solid #000",
+        "border-collapse": "collapse",
+        "font-size": "12px",
+        "margin-bottom": "20px"
+      },
+      "headerStyle": {
+        "background-color": "#2E86C1",
+        "color": "#FFFFFF",
+        "font-weight": "bold"
+      },
+      "rowStyle": [
+        {"background-color": "#f9f9f9"},
+        {"background-color": "#ffffff"}
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Os dados acima representam apenas uma simulação para testes de geração de PDF. Todos os valores são fictícios e destinados a fins de demonstração.",
+      "style": {
+        "font-size": "12px",
+        "font-style": "italic",
+        "text-align": "justify",
+        "margin-top": "15px"
+      }
+    },
+    {
+      "type": "footer",
+      "text": "Propixel Games © 2025 — Relatórios automatizados via Unity",
+      "style": {
+        "text-align": "center",
+        "font-size": "10px",
+        "color": "#888",
+        "margin-top": "40px"
+      }
+    }
+  ]
+}
