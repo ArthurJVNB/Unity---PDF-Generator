@@ -4,7 +4,8 @@ namespace Project.PDFGenerator
 {
     public static class PDFConstants
     {
-        public readonly static string k_TextType = "text";
-        public readonly static string k_ImageType = "image";
+        public const string k_TextType = "text";
+        public const string k_ImageType = "image";
+        public const string k_Pixel = "px";
 	}
 }

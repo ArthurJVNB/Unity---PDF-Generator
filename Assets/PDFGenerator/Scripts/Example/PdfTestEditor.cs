@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using UnityEngine;
 using UnityEditor;
 
@@ -19,5 +20,6 @@ namespace Project.PDFGenerator.Editor
                 pdfTest.GerarPDF();
             }
         }
-    } 
+    }
 }
+#endif
