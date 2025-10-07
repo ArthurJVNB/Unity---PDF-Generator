@@ -27,6 +27,11 @@ namespace Project.PDFGenerator
 			m_Datas.Add(data);
 			return data;
 		}
+
+		public PDFTextData AddText(string text)
+		{
+			return AddText().SetText(text);
+		}
 		#endregion
 
 		#region AddImage

@@ -6,6 +6,8 @@ namespace Project.PDFGenerator
     {
         public const string k_TextType = "text";
         public const string k_ImageType = "image";
-        public const string k_Pixel = "px";
+        public const string k_ListType = "list";
+        public const string k_TableType = "table";
+		public const string k_Pixel = "px";
 	}
 }

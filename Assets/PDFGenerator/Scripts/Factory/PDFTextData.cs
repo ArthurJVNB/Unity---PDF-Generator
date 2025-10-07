@@ -6,15 +6,11 @@ namespace Project.PDFGenerator
 	public class PDFTextData : BasePDFData
 	{
 		public string text;
-		public int fontSize;
-		public string align;
 		public TextStyleData style;
 
 		public PDFTextData(PDFJObjectFactory factory) : base(factory)
 		{
 			type = PDFConstants.k_TextType;
-			fontSize = 12;
-			align = "left";
 		}
 
 		public PDFTextData SetText(string text)
@@ -23,15 +19,9 @@ namespace Project.PDFGenerator
 			return this;
 		}
 
-		public PDFTextData SetFontSize(int fontSize)
+		public PDFTextData SetType(TextType type)
 		{
-			this.fontSize = fontSize;
-			return this;
-		}
-
-		public PDFTextData SetAlign(string align)
-		{
-			this.align = align;
+			this.type = type.ToString().ToLower();
 			return this;
 		}
 
