@@ -7,12 +7,13 @@ namespace Project.PDFGenerator
 	public class PDFListData : BasePDFData
 	{
 		public bool ordered = false;
-		public List<string> items;
+		public List<string> items = new();
+		public ListStyleData style;
 
 		public PDFListData(PDFJObjectFactory factory) : base(factory)
 		{
 			type = PDFConstants.k_ListType;
-			items = new List<string>();
+			style = new(this);
 		}
 
 		public PDFListData SetOrdered(bool ordered)
@@ -26,11 +27,13 @@ namespace Project.PDFGenerator
 			items.Add(item);
 			return this;
 		}
-	}
 
-	public class ListStyle
-	{
-		public int fontSize = 13;
-		//public 
+		public ListStyleData AddStyle()
+		{
+			//style = new(this); // not necessary
+			return style;
+		}
+
+		//TODO: Export (JObject)
 	}
 }
