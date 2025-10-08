@@ -11,6 +11,7 @@ namespace Project.PDFGenerator
 		// Optional
 		public TextFontStyleType fontStyle = TextFontStyleType.Normal;
 		public TextAlignType textAlign = TextAlignType.Left;
+		public FontWeight fontWeight = FontWeight.Regular;
 		public int lineHeight;
 		public Color color = Color.black;
 		public int marginTop;
@@ -18,6 +19,7 @@ namespace Project.PDFGenerator
 
 		public bool useFontStyle = false;
 		public bool useTextAlign = false;
+		public bool useFontWeight = false;
 		public bool useLineHeight = false;
 		public bool useColor = false;
 		public bool useMarginTop = false;
@@ -47,6 +49,13 @@ namespace Project.PDFGenerator
 		{
 			this.textAlign = textAlign;
 			useTextAlign = true;
+			return this;
+		}
+
+		public BaseStyleData<TParent> SetFontWeight(FontWeight fontWeight)
+		{
+			this.fontWeight = fontWeight;
+			useFontWeight = true;
 			return this;
 		}
 
@@ -92,6 +101,7 @@ namespace Project.PDFGenerator
 
 			if (useFontStyle) style.Add("font-style", fontStyle.ToString().ToLower());
 			if (useTextAlign) style.Add("text-align", textAlign.ToString().ToLower());
+			if (useFontWeight) style.Add("font-weight", fontWeight.ToString().ToLower());
 			if (useLineHeight) style.Add("line-height", lineHeight);
 			if (useColor) style.Add("color", ColorUtility.ToHtmlStringRGB(color));
 			if (useMarginTop) style.Add("margin-top", marginTop);
