@@ -12,7 +12,7 @@ namespace Project.PDFGenerator
 		public TextFontStyleType fontStyle = TextFontStyleType.Normal;
 		public TextAlignType textAlign = TextAlignType.Left;
 		public FontWeight fontWeight = FontWeight.Regular;
-		public int lineHeight;
+		public float lineHeight;
 		public Color color = Color.black;
 		public int marginTop;
 		public int marginBottom;
@@ -59,7 +59,7 @@ namespace Project.PDFGenerator
 			return this;
 		}
 
-		public BaseStyleData<TParent> SetLineHeight(int lineHeight)
+		public BaseStyleData<TParent> SetLineHeight(float lineHeight)
 		{
 			this.lineHeight = lineHeight;
 			useLineHeight = true;
@@ -87,7 +87,7 @@ namespace Project.PDFGenerator
 			return this;
 		}
 
-		public TParent EndStyle()
+		public TParent DoneStyle()
 		{
 			return _parent;
 		}

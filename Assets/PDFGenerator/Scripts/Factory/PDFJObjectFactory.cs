@@ -9,6 +9,12 @@ namespace Project.PDFGenerator
 		private PageData m_Page;
 		private List<BasePDFData> m_Datas;
 
+		public static PageData Start()
+		{
+			var factory = new PDFJObjectFactory(new PageData());
+			return factory.m_Page;
+		}
+
 		public static PDFJObjectFactory Start(PageData page)
 		{
 			return new PDFJObjectFactory(page);
@@ -16,6 +22,7 @@ namespace Project.PDFGenerator
 
 		private PDFJObjectFactory(PageData page)
 		{
+			page._parent = this;
 			m_Page = page;
 			m_Datas = new List<BasePDFData>();
 		}
@@ -31,6 +38,16 @@ namespace Project.PDFGenerator
 		public PDFTextData AddText(string text)
 		{
 			return AddText().SetText(text);
+		}
+
+		public PDFTextData AddText(TextType type, string text)
+		{
+			return AddText(text).SetType(type);
+		}
+
+		public PDFTextData AddText(TextType type)
+		{
+			return AddText().SetType(type);
 		}
 		#endregion
 

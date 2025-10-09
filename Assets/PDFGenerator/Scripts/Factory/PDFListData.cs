@@ -28,9 +28,10 @@ namespace Project.PDFGenerator
 			return this;
 		}
 
-		public ListStyleData AddStyle()
+		public ListStyleData AddStyle(int fontSize)
 		{
 			//style = new(this); // not necessary
+			style.fontSize = fontSize;
 			return style;
 		}
 

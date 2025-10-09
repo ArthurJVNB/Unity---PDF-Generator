@@ -49,15 +49,22 @@ namespace Project.PDFGenerator
 			return this;
 		}
 
-		public PDFImageData SetStyle(ImageStyleData style)
+		public ImageStyleData AddStyle()
 		{
+			style = new(this);
+			return style;
+		}
+
+		public PDFImageData AddStyle(ImageStyleData style)
+		{
+			style._parent = this;
 			this.style = style;
 			return this;
 		}
 
-		public PDFImageData SetStyle(ImageDisplayType display, int margin, bool marginAuto, int width, int height)
+		public PDFImageData AddStyle(ImageDisplayType display, int margin, bool marginAuto, int width, int height)
 		{
-			return SetStyle(new(display, margin, marginAuto, width, height));
+			return AddStyle(new(this, display, margin, marginAuto, width, height));
 		}
 	}
 }
