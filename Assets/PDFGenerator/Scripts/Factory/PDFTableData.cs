@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
+using Newtonsoft.Json.Linq;
 
 namespace Project.PDFGenerator
 {
 	[Serializable]
-	public class PDFTableData : BasePDFData
+	public class PDFTableData : BasePDFData, IExportable<JObject>
 	{
 		public List<string> header = new();
 		public List<List<string>> rows = new();
@@ -64,6 +65,18 @@ namespace Project.PDFGenerator
 			return rowStyle;
 		}
 
-		//TODO: Export (JObject)
+		public JObject GetExportData()
+		{
+			return new JObject()
+			{
+				new JProperty("type", type),
+				new JProperty("header", new JArray(header)),
+				new JProperty("rows", new JArray(rows.ConvertAll(row => new JArray(row)))),
+				new JProperty("style", style.GetExportData()),
+				new JProperty("headerStyle", headerStyle.GetExportData()),
+				new JProperty("cellStyle", cellStyle.GetExportData()),
+				new JProperty("rowStyle", rowStyle.GetExportData()),
+			};
+		}
 	}
 }
