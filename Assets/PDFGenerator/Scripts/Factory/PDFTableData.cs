@@ -10,13 +10,16 @@ namespace Project.PDFGenerator
 		public List<List<string>> rows = new();
 		public TableStyleData style;
 		public TableHeaderStyleData headerStyle;
-		//TODO: rowStyle
+		public TableCellStyleData cellStyle;
+		public TableRowStyleData rowStyle;
 
 		public PDFTableData(PDFJObjectFactory factory) : base(factory)
 		{
 			type = PDFConstants.k_TableType;
 			style = new(this);
 			headerStyle = new(this);
+			cellStyle = new(this);
+			rowStyle = new(this);
 		}
 
 		public PDFTableData SetHeader(List<string> header)
@@ -39,6 +42,26 @@ namespace Project.PDFGenerator
 		public PDFTableData AddRow(params string[] row)
 		{
 			return AddRow(new List<string>(row));
+		}
+
+		public TableStyleData AddStyle()
+		{
+			return style;
+		}
+
+		public TableHeaderStyleData AddHeaderStyle()
+		{
+			return headerStyle;
+		}
+
+		public TableCellStyleData AddCellStyle()
+		{
+			return cellStyle;
+		}
+
+		public TableRowStyleData AddRowStyle()
+		{
+			return rowStyle;
 		}
 
 		//TODO: Export (JObject)
