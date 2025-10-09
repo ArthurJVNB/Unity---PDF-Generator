@@ -9,13 +9,14 @@ namespace Project.PDFGenerator
 		public List<string> header = new();
 		public List<List<string>> rows = new();
 		public TableStyleData style;
-		//TODO: headerStyle
+		public TableHeaderStyleData headerStyle;
 		//TODO: rowStyle
 
 		public PDFTableData(PDFJObjectFactory factory) : base(factory)
 		{
 			type = PDFConstants.k_TableType;
 			style = new(this);
+			headerStyle = new(this);
 		}
 
 		public PDFTableData SetHeader(List<string> header)
