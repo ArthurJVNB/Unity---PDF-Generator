@@ -1,9 +1,10 @@
 using System;
+using Newtonsoft.Json.Linq;
 
 namespace Project.PDFGenerator
 {
 	[Serializable]
-	public abstract class BasePDFData
+	public abstract class BasePDFData : IExportable<JObject>
 	{
 		public string type;
 		internal PDFJObjectFactory factory;
@@ -17,5 +18,7 @@ namespace Project.PDFGenerator
 		{
 			return factory;
 		}
+
+		public abstract JObject GetExportData();
 	}
 }

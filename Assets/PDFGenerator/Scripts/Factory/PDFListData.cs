@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Newtonsoft.Json.Linq;
 
 namespace Project.PDFGenerator
 {
@@ -35,6 +36,15 @@ namespace Project.PDFGenerator
 			return style;
 		}
 
-		//TODO: Export (JObject)
+		public override JObject GetExportData()
+		{
+			return new JObject()
+			{
+				new JProperty("type", type),
+				new JProperty("ordered", ordered.ToString().ToLower()),
+				new JObject("items", new JArray(items.ToArray())),
+				new JProperty("style", style.GetExportData()),
+			};
+		}
 	}
 }

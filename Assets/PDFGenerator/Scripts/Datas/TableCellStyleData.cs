@@ -26,7 +26,7 @@ namespace Project.PDFGenerator
 
 		public TableCellStyleData SetBorder(int width, Color color)
 		{
-			return border.SetWidth(width).SetColor(color).DoneStyle();
+			return border.SetWidth(width).SetColor(color).DoneBorder();
 		}
 
 		public PDFTableData DoneStyle()
@@ -38,13 +38,23 @@ namespace Project.PDFGenerator
 		{
 			return new JObject()
 			{
-				{ "cellStyle", new JObject()
-					{
-						{ "border", border.GetExportData()["border"] },
-						{ "padding", $"{padding}{PDFConstants.k_Pixel}" },
-					}
-				}
+				new JProperty("cellStyle", new JObject()
+				{
+					new JProperty(border.GetExportData()),
+					new JProperty("padding", $"{padding}{PDFConstants.k_Pixel}"),
+				})
 			};
+
+			//return new JObject()
+			//{
+			//	{ "cellStyle", new JObject()
+			//		{
+			//			//{ "border", border.GetExportData()["border"] },
+			//			{ border.GetExportData() },
+			//			{ "padding", $"{padding}{PDFConstants.k_Pixel}" },
+			//		}
+			//	}
+			//};
 		}
 	}
 }

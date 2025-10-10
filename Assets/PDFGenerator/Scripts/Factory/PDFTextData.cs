@@ -1,4 +1,5 @@
 using System;
+using Newtonsoft.Json.Linq;
 
 namespace Project.PDFGenerator
 {
@@ -25,10 +26,20 @@ namespace Project.PDFGenerator
 			return this;
 		}
 
-		public TextStyleData AddStyle(int fontSize)
+		public TextStyleData AddStyle(int fontSize = PDFConstants.k_DefaultFontSize)
 		{
 			style = new TextStyleData(this, fontSize);
 			return style;
+		}
+
+		public override JObject GetExportData()
+		{
+			return new JObject()
+			{
+				new JProperty("type", type),
+				new JProperty("text", text),
+				new JProperty("style", style.GetExportData()),
+			};
 		}
 	}
 }

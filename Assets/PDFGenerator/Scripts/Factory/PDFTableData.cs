@@ -50,6 +50,11 @@ namespace Project.PDFGenerator
 			return style;
 		}
 
+		public TableStyleData AddStyle(int fontSize)
+		{
+			return style.SetFontSize(fontSize);
+		}
+
 		public TableHeaderStyleData AddHeaderStyle()
 		{
 			return headerStyle;
@@ -65,7 +70,7 @@ namespace Project.PDFGenerator
 			return rowStyle;
 		}
 
-		public JObject GetExportData()
+		public override JObject GetExportData()
 		{
 			return new JObject()
 			{

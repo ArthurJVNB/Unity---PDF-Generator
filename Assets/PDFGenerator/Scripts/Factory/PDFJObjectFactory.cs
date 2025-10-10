@@ -89,20 +89,33 @@ namespace Project.PDFGenerator
 		}
 		#endregion
 
-		#region AddTable (TODO)
-		//TODO
+		#region AddTable
+		public PDFTableData AddTable()
+		{
+			var data = new PDFTableData(this);
+			m_Datas.Add(data);
+			return data;
+		}
 		#endregion
 
-		public (JObject page, JObject[] content) Create()
+		public JObject Create()
 		{
-			(JObject page, JObject[] content) result = new();
-			result.page = m_Page.GetExportData();
-			result.content = new JObject[m_Datas.Count];
-			for (int i = 0; i < m_Datas.Count; i++)
-			{
-				result.content[i] = JObject.FromObject(m_Datas[i]);
-			}
-			return result;
+			#region Backup
+			//(JObject page, JObject[] content) result = new();
+			//result.page = m_Page.GetExportData();
+			//result.content = new JObject[m_Datas.Count];
+			//for (int i = 0; i < m_Datas.Count; i++)
+			//{
+			//	result.content[i] = JObject.FromObject(m_Datas[i]);
+			//}
+			//return result;
+			#endregion
+
+			var page = m_Page.GetExportData();
+			var content = new JArray();
+			foreach (var item in m_Datas)
+				content.Add(item.GetExportData());
+			return new JObject(page, content);
 		}
 	}
 }

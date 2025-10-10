@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Project.PDFGenerator
 {
 	[Serializable]
-	public class Border<TParent> : IExportable<JObject>
+	public class Border<TParent> : IExportable<JProperty>
 	{
 		private const string px = PDFConstants.k_Pixel;
 
@@ -38,17 +38,14 @@ namespace Project.PDFGenerator
 			return this;
 		}
 
-		public TParent DoneStyle()
+		public TParent DoneBorder()
 		{
 			return _parent;
 		}
 
-		public JObject GetExportData()
+		public JProperty GetExportData()
 		{
-			return new JObject
-			{
-				{ "border", $"{width}{px} {type.ToString().ToLower()} {ColorUtility.ToHtmlStringRGB(color)}" }, // e.g. "1px solid #000000"
-			};
+			return new JProperty("border", $"{width}{px} {type.ToString().ToLower()} {ColorUtility.ToHtmlStringRGB(color)}"); // e.g. "1px solid #000000"
 		}
 	}
 }

@@ -1,4 +1,5 @@
 using System;
+using Newtonsoft.Json.Linq;
 
 namespace Project.PDFGenerator
 {
@@ -65,6 +66,16 @@ namespace Project.PDFGenerator
 		public PDFImageData AddStyle(ImageDisplayType display, int margin, bool marginAuto, int width, int height)
 		{
 			return AddStyle(new(this, display, margin, marginAuto, width, height));
+		}
+
+		public override JObject GetExportData()
+		{
+			return new JObject()
+			{
+				new JProperty("type", type),
+				new JProperty("src", url),
+				new JProperty("style", style.GetExportData()),
+			};
 		}
 	}
 }

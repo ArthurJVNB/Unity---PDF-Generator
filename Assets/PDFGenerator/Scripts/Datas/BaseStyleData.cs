@@ -38,6 +38,12 @@ namespace Project.PDFGenerator
 			this.fontSize = fontSize;
 		}
 
+		public BaseStyleData<TParent> SetFontSize(int fontSize)
+		{
+			this.fontSize = fontSize;
+			return this;
+		}
+
 		public BaseStyleData<TParent> SetFontStyle(TextFontStyleType fontStyle)
 		{
 			this.fontStyle = fontStyle;

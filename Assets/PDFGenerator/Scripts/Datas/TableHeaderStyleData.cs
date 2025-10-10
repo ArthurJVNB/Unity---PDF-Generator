@@ -48,6 +48,11 @@ namespace Project.PDFGenerator
 			this.padding = padding;
 			return this;
 		}
+		
+		public PDFTableData DoneStyle()
+		{
+			return _parent;
+		}
 
 		public JObject GetExportData()
 		{
