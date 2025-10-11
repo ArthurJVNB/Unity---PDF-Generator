@@ -5,6 +5,8 @@ namespace Project.PDFGenerator
 {
 	public class BaseStyleData<TParent> : IExportable<JObject>
 	{
+		private const string px = PDFConstants.k_Pixel;
+
 		// Mandatory
 		public int fontSize;
 
@@ -102,18 +104,18 @@ namespace Project.PDFGenerator
 		{
 			var style = new JObject
 			{
-				["fontSize"] = fontSize
+				["font-size"] = $"{fontSize}{px}"
 			};
 
 			if (useFontStyle) style.Add("font-style", fontStyle.ToString().ToLower());
 			if (useTextAlign) style.Add("text-align", textAlign.ToString().ToLower());
 			if (useFontWeight) style.Add("font-weight", fontWeight.ToString().ToLower());
-			if (useLineHeight) style.Add("line-height", lineHeight);
-			if (useColor) style.Add("color", ColorUtility.ToHtmlStringRGB(color));
-			if (useMarginTop) style.Add("margin-top", marginTop);
-			if (useMarginBottom) style.Add("margin-bottom", marginBottom);
+			if (useLineHeight) style.Add("line-height", lineHeight.ToStringPDF());
+			if (useColor) style.Add("color", PDFColorUtility.ToHtmlStringRGB(color));
+			if (useMarginTop) style.Add("margin-top", $"{marginTop}{px}");
+			if (useMarginBottom) style.Add("margin-bottom", $"{marginBottom}{px}");
 
-			return new JObject { { "style", style } };
+			return style;
 		}
 	}
 }

@@ -26,9 +26,9 @@
       "text": "Este relatório foi gerado automaticamente via Unity + PHP, demonstrando a integração entre as plataformas para gerar documentos PDF dinâmicos.",
       "style": {
         "font-size": "14px",
-        "margin-bottom": "15px",
         "text-align": "justify",
-        "line-height": "1.4"
+        "line-height": "1.4",
+        "margin-bottom": "15px"
       }
     },
     {
@@ -46,10 +46,10 @@
       "text": "Resumo Geral",
       "style": {
         "font-size": "18px",
+        "font-weight": "bold",
         "color": "#1B4F72",
         "margin-top": "25px",
-        "margin-bottom": "10px",
-        "font-weight": "bold"
+        "margin-bottom": "10px"
       }
     },
     {
@@ -107,8 +107,8 @@
       "type": "footer",
       "text": "Propixel Games © 2025 — Relatórios automatizados via Unity",
       "style": {
-        "text-align": "center",
         "font-size": "10px",
+        "text-align": "center",
         "color": "#888",
         "margin-top": "40px"
       }
