@@ -1,0 +1,181 @@
+{
+  "page": {
+    "size": "A4",
+    "orientation": "portrait",
+    "margin": "30px"
+  },
+  "content": [
+    {
+      "type": "title",
+      "text": "Relatório Completo de Estilos",
+      "style": {
+        "text-align": "center",
+        "color": "#2E86C1",
+        "font-size": "26px",
+        "font-weight": "bold",
+        "margin-bottom": "20px"
+      }
+    },
+    {
+      "type": "subtitle",
+      "text": "Texto e Parágrafos",
+      "style": {
+        "font-size": "18px",
+        "color": "#000",
+        "margin-bottom": "10px",
+        "text-align": "left"
+      }
+    },
+    {
+      "type": "paragraph",
+      "text": "Você pode controlar tamanho, cor, alinhamento, margens, espaçamento e até sublinhado. Também é possível adicionar fundo e bordas.",
+      "style": {
+        "font-size": "14px",
+        "color": "#333",
+        "background-color": "#F4F6F6",
+        "padding": "8px",
+        "border": "1px solid #D5D8DC",
+        "border-radius": "5px",
+        "margin-bottom": "10px",
+        "line-height": "1.4",
+        "text-align": "justify"
+      }
+    },
+    {
+      "type": "paragraph",
+      "text": "Texto centralizado e azul.",
+      "style": {
+        "text-align": "center",
+        "color": "#2980B9",
+        "font-size": "16px",
+        "font-weight": "bold",
+        "margin-bottom": "10px"
+      }
+    },
+    {
+      "type": "paragraph",
+      "text": "Texto em itálico e sublinhado, alinhado à direita.",
+      "style": {
+        "text-align": "right",
+        "font-style": "italic",
+        "text-decoration": "underline",
+        "color": "#C0392B"
+      }
+    },
+    {
+      "type": "image",
+      "src": "https://www.propixelgames.online/pdf/images/icon.png",
+      "style": {
+        "display": "block",
+        "margin": "20px auto",
+        "width": "120px",
+        "border": "2px solid #2E86C1",
+        "border-radius": "10px",
+        "background-color": "#EAF2F8",
+        "padding": "5px"
+      }
+    },
+    {
+      "type": "subtitle",
+      "text": "Listas com Estilo",
+      "style": {
+        "font-size": "18px",
+        "margin-top": "20px",
+        "margin-bottom": "10px",
+        "color": "#1B4F72"
+      }
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "items": [
+        "Item com marcador padrão",
+        "Item com cor personalizada",
+        "Item com espaçamento maior"
+      ],
+      "style": {
+        "font-size": "13px",
+        "color": "#212F3C",
+        "list-style-type": "disc",
+        "margin-left": "25px",
+        "line-height": "1.6"
+      }
+    },
+    {
+      "type": "list",
+      "ordered": true,
+      "items": [
+        "Primeiro item numerado",
+        "Segundo item numerado",
+        "Terceiro item numerado"
+      ],
+      "style": {
+        "font-size": "13px",
+        "color": "#283747",
+        "margin-left": "30px",
+        "line-height": "1.5"
+      }
+    },
+    {
+      "type": "subtitle",
+      "text": "Tabelas com Cores e Bordas",
+      "style": {
+        "font-size": "18px",
+        "color": "#117A65",
+        "margin-top": "25px",
+        "margin-bottom": "10px"
+      }
+    },
+    {
+      "type": "table",
+      "header": ["Produto", "Quantidade", "Preço", "Total"],
+      "rows": [
+        ["Notebook", "2", "R$ 3.500", "R$ 7.000"],
+        ["Mouse Gamer", "5", "R$ 150", "R$ 750"],
+        ["Teclado Mecânico", "3", "R$ 400", "R$ 1.200"]
+      ],
+      "style": {
+        "width": "100%",
+        "border": "1px solid #000",
+        "border-collapse": "collapse",
+        "font-size": "13px",
+        "text-align": "center",
+        "margin-bottom": "20px"
+      },
+      "headerStyle": {
+        "background-color": "#2E86C1",
+        "color": "#FFFFFF",
+        "font-weight": "bold",
+        "padding": "6px"
+      },
+      "cellStyle": {
+        "border": "1px solid #000",
+        "padding": "5px"
+      },
+      "rowStyle": [
+        { "background-color": "#ECF0F1" },
+        { "background-color": "#FFFFFF" }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Você pode usar estilos combinados para criar documentos muito mais ricos e bonitos.",
+      "style": {
+        "font-size": "14px",
+        "margin-top": "15px",
+        "text-align": "justify",
+        "color": "#2C3E50"
+      }
+    },
+    {
+      "type": "footer",
+      "text": "Relatório gerado via json exemplo",
+      "style": {
+        "text-align": "center",
+        "font-size": "12px",
+        "color": "#888",
+        "margin-top": "40px"
+      }
+    }
+  ]
+}

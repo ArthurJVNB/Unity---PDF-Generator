@@ -2,13 +2,24 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.Networking;
 using Newtonsoft.Json.Linq;
+using Project.PDFGenerator;
 
 public class PdfTest : MonoBehaviour
 {
     private const string _api = "https://www.propixelgames.online/";
     private const string _post_create_pdf = _api + "pdf/createpdf.php";
 
-    public void GerarPDF()
+    [SerializeField] private FromType _from = FromType.Example2;
+
+    private enum FromType
+    {
+        Example1,
+        Example2,
+        FactoryExample1,
+        FactoryExample2,
+	}
+
+	public void GerarPDF()
     {
         StartCoroutine(GerarPDFCoroutine());
     }
@@ -209,9 +220,130 @@ public class PdfTest : MonoBehaviour
     }
     #endregion
 
+    #region Factory Example 1
+    private JObject JObjectFactoryExample1
+    {
+        get
+        {
+            return PDFJObjectFactory.Start()
+                .SetSize(PageSize.A4).SetMargins(40).SetOrientation(PageOrientation.Portrait).Done()
+                // Título
+                .AddText(TextType.Title, "Relatório de Vendas - Outubro 2025")
+                    .AddStyle(26).SetTextAlign(TextAlignType.Center).SetColor(new Color(46 / 255f, 134 / 255f, 193 / 255f)).SetMarginBottom(25).SetFontWeight(FontWeight.Bold).DoneStyle()
+                    .Done()
+                // Parágrafo
+                .AddText(TextType.Paragraph)
+                    .SetText("Este relatório foi gerado automaticamente via Unity + PHP usando padrão Factory, demonstrando a integração entre as plataformas para gerar documentos PDF dinâmicos.")
+                        .AddStyle(14)
+                        .SetMarginBottom(15)
+                        .SetTextAlign(TextAlignType.Justify)
+                        .SetLineHeight(1.4f)
+                        .DoneStyle()
+                    .Done()
+                // Imagem
+                .AddImage("http://www.propixelgames.online/pdf/images/icon.png")
+                    .AddStyle()
+                        .SetDisplay(ImageDisplayType.Block)
+                        .SetMargin(10, marginAuto: true)
+                        .SetWidth(120)
+                        .SetHeight(120)
+                        .DoneStyle()
+                    .Done()
+                // Subtítulo
+                .AddText(TextType.Subtitle, "Resumo Geral")
+                    .AddStyle(18)
+                        .SetColor(new Color(27 / 255f, 79 / 255f, 114 / 255f))
+                        .SetMarginTop(25)
+                        .SetMarginBottom(10)
+                        .SetFontWeight(FontWeight.Bold)
+                        .DoneStyle()
+                    .Done()
+                // Lista
+                .AddList().SetOrdered(false)
+                    .AddItem("Período: 01 a 30 de Outubro de 2025")
+                    .AddItem("Total de pedidos: 34")
+                    .AddItem("Clientes atendidos: 29")
+                    .AddItem("Lucro bruto: R$ 47.500,00")
+                    .AddStyle(13).SetMarginBottom(20).DoneStyle()
+                    .Done()
+                // Tabela
+                .AddTable()
+                    .SetHeader("Produto", "Quantidade", "Preço Unitário", "Total")
+                    .AddRow("Nintendo Switch", "10", "R$2.000", "R$20.000")
+                    .AddRow("Smash Bros Ultimate", "5", "R$400", "R$2.000")
+                    .AddRow("Pro Controller", "8", "R$300", "R$2.400")
+                    .AddRow("Zelda Tears of the Kingdom", "6", "R$450", "R$2.700")
+                    .AddRow("Amiibo Mario", "12", "R$180", "R$2.160")
+                    .AddStyle(12)
+                        .SetWidthPercent(100)
+                        .AddBorder()
+                            .SetWidth(1)
+                            .SetType(BorderType.Solid)
+                            .SetColor(Color.black)
+                            .DoneBorder()
+                        //.SetBorderCollapse() // not implemented
+                        .SetMarginBottom(20)
+                        .DoneStyle()
+                    .AddHeaderStyle()
+                        .SetBackgroundColor(new Color(46/255f, 134/255f, 193/255f))
+                        .SetColor(Color.white)
+                        .SetFontWeight(FontWeight.Bold)
+                        .DoneStyle()
+                    .AddRowStyle()
+                        .AddBackgroundColor(new Color(249/255f, 249/255f, 249/255f))
+                        .AddBackgroundColor(Color.white)
+                        .DoneStyle()
+                    .Done()
+                // Parágrafo final
+                .AddText(TextType.Paragraph, "Os dados acima representam apenas uma simulação para testes de geração de PDF. Todos os valores são fictícios e destinados a fins de demonstração.")
+                    .AddStyle(12)
+                        .SetFontStyle(TextFontStyleType.Italic)
+                        .SetTextAlign(TextAlignType.Justify)
+                        .SetMarginTop(15)
+                        .DoneStyle()
+                    .Done()
+				// Rodapé
+				.AddText(TextType.Footer, "Propixel Games © 2025 — Relatórios automatizados via Unity usando padrão Factory")
+                    .AddStyle(10)
+                        .SetTextAlign(TextAlignType.Center)
+                        .SetColor(new Color(136/255f, 136/255f, 136/255f))
+                        .SetMarginTop(40)
+                        .DoneStyle()
+                    .Done()
+                .Create();
+        }
+    }
+	#endregion
+
+	#region Factory Example 2
+	private JObject JObjectFactoryExample2
+	{
+		get
+		{
+			// Implement your factory logic here
+			return new JObject();
+		}
+	}
+	#endregion
+
+	private JObject JObjectBySetting
+    {
+        get
+        {
+			return _from switch
+			{
+				FromType.Example1 => JObjectPdf,
+				FromType.Example2 => JObjectPdf2,
+				FromType.FactoryExample1 => JObjectFactoryExample1,
+				FromType.FactoryExample2 => throw new System.NotImplementedException("FactoryExample2 not implemented yet."),
+				_ => JObjectPdf,
+			};
+		}
+    }
+
     private IEnumerator GerarPDFCoroutine()
     {
-        string jsonString = JObjectPdf.ToString();
+        string jsonString = JObjectBySetting.ToString();
         WWWForm form = new WWWForm();
         form.AddField("json", jsonString);
 
