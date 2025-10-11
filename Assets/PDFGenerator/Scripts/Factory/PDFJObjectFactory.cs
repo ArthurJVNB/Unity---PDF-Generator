@@ -115,7 +115,9 @@ namespace Project.PDFGenerator
 			var content = new JArray();
 			foreach (var item in m_Datas)
 				content.Add(item.GetExportData());
-			return new JObject(page, content);
+			return new JObject(
+				new JProperty("page", page),
+				new JProperty("content", content));
 		}
 	}
 }

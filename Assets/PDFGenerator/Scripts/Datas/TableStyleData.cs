@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Project.PDFGenerator
 {
 	[Serializable]
-	public class TableStyleData : IExportable<JObject>
+	public class TableStyleData : IExportable<JProperty>
 	{
 		private string px = PDFConstants.k_Pixel;
 
@@ -71,20 +71,17 @@ namespace Project.PDFGenerator
 			return _parent;
 		}
 
-		public JObject GetExportData()
+		public JProperty GetExportData()
 		{
-			return new JObject()
+			return new JProperty("style", new JObject()
 			{
-				new JProperty("style", new JObject()
-				{
-					new JProperty("width", $"{widthPercent:0.##}%"),
-					border.GetExportData(),
-					new JProperty("border-collapse", "collapse"), // not implemented class
-					new JProperty("font-size", $"{fontSize}{px}"),
-					new JProperty("text-align", textAlign.ToString().ToLower()),
-					new JProperty("margin-bottom", $"{marginBottom}{px}")
-				})
-			};
+				new JProperty("width", $"{widthPercent:0.##}%"),
+				border.GetExportData(),
+				new JProperty("border-collapse", "collapse"), // not implemented class
+				new JProperty("font-size", $"{fontSize}{px}"),
+				new JProperty("text-align", textAlign.ToString().ToLower()),
+				new JProperty("margin-bottom", $"{marginBottom}{px}")
+			});
 		}
 	}
 }

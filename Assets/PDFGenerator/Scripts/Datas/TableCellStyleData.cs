@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Project.PDFGenerator
 {
 	[Serializable]
-	public class TableCellStyleData : IExportable<JObject>
+	public class TableCellStyleData : IExportable<JProperty>
 	{
 		public Border<TableCellStyleData> border;
 		public int padding;
@@ -34,16 +34,13 @@ namespace Project.PDFGenerator
 			return _parent;
 		}
 
-		public JObject GetExportData()
+		public JProperty GetExportData()
 		{
-			return new JObject()
+			return new JProperty("cellStyle", new JObject()
 			{
-				new JProperty("cellStyle", new JObject()
-				{
-					new JProperty(border.GetExportData()),
-					new JProperty("padding", $"{padding}{PDFConstants.k_Pixel}"),
-				})
-			};
+				new JProperty(border.GetExportData()),
+				new JProperty("padding", $"{padding}{PDFConstants.k_Pixel}"),
+			});
 
 			//return new JObject()
 			//{

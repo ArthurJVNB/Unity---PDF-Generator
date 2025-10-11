@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Project.PDFGenerator
 {
 	[Serializable]
-	public class TableRowStyleData : IExportable<JObject>
+	public class TableRowStyleData : IExportable<JProperty>
 	{
 		[ColorUsage(true)]
 		public List<Color> backgroundColor = new() { new(0, 0, 0, 0) };
@@ -48,18 +48,16 @@ namespace Project.PDFGenerator
 			return _parent;
 		}
 
-		public JObject GetExportData()
+		public JProperty GetExportData()
 		{
 			JArray array = new();
 			foreach (Color color in backgroundColor)
 			{
-				array.Add(new JProperty("background-color", ColorUtility.ToHtmlStringRGBA(color)));
+				//array.Add(new JProperty("background-color", ColorUtility.ToHtmlStringRGBA(color)));
+				array.Add(new JObject()["background-color"] = ColorUtility.ToHtmlStringRGBA(color));
 			}
 
-			return new JObject()
-			{
-				{ "rowStyle", array }
-			};
+			return new JProperty("rowStyle", array);
 		}
 	}
 }

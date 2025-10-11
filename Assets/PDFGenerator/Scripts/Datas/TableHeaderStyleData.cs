@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Project.PDFGenerator
 {
 	[Serializable]
-	public class TableHeaderStyleData : IExportable<JObject>
+	public class TableHeaderStyleData : IExportable<JProperty>
 	{
 		private const string px = PDFConstants.k_Pixel;
 
@@ -54,19 +54,27 @@ namespace Project.PDFGenerator
 			return _parent;
 		}
 
-		public JObject GetExportData()
+		public JProperty GetExportData()
 		{
-			return new JObject()
+			return new JProperty("headerStyle", new JObject()
 			{
-				{ "headerStyle", new JObject()
-					{
-						{ "background-color", ColorUtility.ToHtmlStringRGBA(backgroundColor) },
-						{ "color", ColorUtility.ToHtmlStringRGBA(color) },
-						{ "fontWeight", fontWeight.ToString().ToLower() },
-						{ "padding", $"{padding}{px}"},
-					}
-				}
-			};
+				new JProperty("background-color", ColorUtility.ToHtmlStringRGBA(backgroundColor)),
+				new JProperty("color", ColorUtility.ToHtmlStringRGBA(color)),
+				new JProperty("fontWeight", fontWeight.ToString().ToLower()),
+				new JProperty("padding", $"{padding}{px}"),
+			});
+
+			//return new JObject()
+			//{
+			//	{ "headerStyle", new JObject()
+			//		{
+			//			{ "background-color", ColorUtility.ToHtmlStringRGBA(backgroundColor) },
+			//			{ "color", ColorUtility.ToHtmlStringRGBA(color) },
+			//			{ "fontWeight", fontWeight.ToString().ToLower() },
+			//			{ "padding", $"{padding}{px}"},
+			//		}
+			//	}
+			//};
 		}
 	}
 }

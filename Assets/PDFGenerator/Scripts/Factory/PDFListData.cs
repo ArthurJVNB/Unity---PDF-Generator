@@ -38,11 +38,16 @@ namespace Project.PDFGenerator
 
 		public override JObject GetExportData()
 		{
+			var items = new JArray();
+			foreach (var item in this.items)
+			{
+				items.Add(item);
+			}
 			return new JObject()
 			{
 				new JProperty("type", type),
 				new JProperty("ordered", ordered.ToString().ToLower()),
-				new JObject("items", new JArray(items.ToArray())),
+				new JProperty("items", items),
 				new JProperty("style", style.GetExportData()),
 			};
 		}
