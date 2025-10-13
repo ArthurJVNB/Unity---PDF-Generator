@@ -8,7 +8,7 @@ namespace Project.PDFGenerator
 
 		public static Color ParseHtmlString(string hex)
 		{
-			ColorUtility.TryParseHtmlString(hex, out var color);
+			ColorUtility.TryParseHtmlString(k_PrefixColorHtml + hex.Replace("#", string.Empty), out var color);
 			return color;
 		}
 

@@ -18,6 +18,8 @@ namespace Project.PDFGenerator
 		public Color color = Color.black;
 		public int marginTop;
 		public int marginBottom;
+		public int marginLeft;
+		public int marginRight;
 
 		public bool useFontStyle = false;
 		public bool useTextAlign = false;
@@ -26,6 +28,8 @@ namespace Project.PDFGenerator
 		public bool useColor = false;
 		public bool useMarginTop = false;
 		public bool useMarginBottom = false;
+		public bool useMarginLeft = false;
+		public bool useMarginRight = false;
 
 		protected TParent _parent;
 
@@ -95,12 +99,26 @@ namespace Project.PDFGenerator
 			return this;
 		}
 
+		public BaseStyleData<TParent> SetMarginLeft(int marginLeft)
+		{
+			this.marginLeft = marginLeft;
+			useMarginLeft = true;
+			return this;
+		}
+
+		public BaseStyleData<TParent> SetMarginRight(int marginRight)
+		{
+			this.marginRight = marginRight;
+			useMarginRight = true;
+			return this;
+		}
+
 		public TParent DoneStyle()
 		{
 			return _parent;
 		}
 
-		public JObject GetExportData()
+		public virtual JObject GetExportData()
 		{
 			var style = new JObject
 			{
@@ -113,6 +131,8 @@ namespace Project.PDFGenerator
 			if (useLineHeight) style.Add("line-height", lineHeight.ToStringPDF());
 			if (useColor) style.Add("color", PDFColorUtility.ToHtmlStringRGB(color));
 			if (useMarginTop) style.Add("margin-top", $"{marginTop}{px}");
+			if (useMarginLeft) style.Add("margin-left", $"{marginLeft}{px}");
+			if (useMarginRight) style.Add("margin-right", $"{marginRight}{px}");
 			if (useMarginBottom) style.Add("margin-bottom", $"{marginBottom}{px}");
 
 			return style;

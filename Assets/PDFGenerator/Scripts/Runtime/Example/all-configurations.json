@@ -95,10 +95,10 @@
       ],
       "style": {
         "font-size": "13px",
+        "line-height": "1.6",
         "color": "#212F3C",
-        "list-style-type": "disc",
         "margin-left": "25px",
-        "line-height": "1.6"
+        "list-style-type": "disc"
       }
     },
     {
