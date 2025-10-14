@@ -4,11 +4,11 @@ using UnityEngine;
 
 namespace Project.PDFGenerator.Tests
 {
-	public class TextDataTest
+	public class PDFTextDataTest
 	{
 		// A Test behaves as an ordinary method
 		[Test]
-		public void TitleDataTestJson()
+		public void TestJsonTitle()
 		{
 			// Use the Assert class to test conditions
 			const string expected = "{\"type\":\"title\",\"text\":\"Relatório de Vendas - Outubro 2025\",\"style\":{\"font-size\":\"26px\",\"text-align\":\"center\",\"font-weight\":\"bold\",\"color\":\"#2E86C1\",\"margin-bottom\":\"25px\"}}";
@@ -22,7 +22,7 @@ namespace Project.PDFGenerator.Tests
 		}
 
 		[Test]
-		public void ParagraphDataTestJson()
+		public void TestJsonParagraph()
 		{
 			const string expected = "{\"type\":\"paragraph\",\"text\":\"Este eh um paragrafo.\"," +
 				"\"style\":{\"font-size\":\"14px\",\"text-align\":\"justify\",\"line-height\":\"1.4\",\"margin-bottom\":\"15px\"}}";
@@ -34,7 +34,7 @@ namespace Project.PDFGenerator.Tests
 		}
 
 		[Test]
-		public void SubtitleDataTestJson()
+		public void TestJsonSubtitle()
 		{
 			const string expected = "{\"type\":\"subtitle\",\"text\":\"Resumo Geral\",\"style\":{\"font-size\":\"18px\",\"font-weight\":\"bold\",\"color\":\"#1B4F72\",\"margin-top\":\"25px\",\"margin-bottom\":\"10px\"}}";
 			var actual = new PDFTextData(null).SetType(TextType.Subtitle).SetText("Resumo Geral")
@@ -44,7 +44,7 @@ namespace Project.PDFGenerator.Tests
 		}
 
 		[Test]
-		public void FooterDataTestJson()
+		public void TestJsonFooter()
 		{
 			const string expected = "{\"type\":\"footer\",\"text\":\"Propixel Games © 2025 — Relatórios automatizados via Unity\",\"style\":{\"font-size\":\"10px\",\"text-align\":\"center\",\"color\":\"#888888\",\"margin-top\":\"40px\"}}";
 			var actual = new PDFTextData(null).SetType(TextType.Footer).SetText("Propixel Games © 2025 — Relatórios automatizados via Unity")
