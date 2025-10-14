@@ -11,10 +11,10 @@ namespace Project.PDFGenerator.Tests
 		public void TestJsonTitle()
 		{
 			// Use the Assert class to test conditions
-			const string expected = "{\"type\":\"title\",\"text\":\"Relatório de Vendas - Outubro 2025\",\"style\":{\"font-size\":\"26px\",\"text-align\":\"center\",\"font-weight\":\"bold\",\"color\":\"#2E86C1\",\"margin-bottom\":\"25px\"}}";
+			const string expected = "{\"type\":\"title\",\"text\":\"Relatorio de Vendas - Outubro 2025\",\"style\":{\"font-size\":\"26px\",\"text-align\":\"center\",\"font-weight\":\"bold\",\"color\":\"#2E86C1\",\"margin-bottom\":\"25px\"}}";
 
 			ColorUtility.TryParseHtmlString("#2E86C1", out Color color);
-			var actual = new PDFTextData(null).SetType(TextType.Title).SetText("Relatório de Vendas - Outubro 2025")
+			var actual = new PDFTextData(null).SetType(TextType.Title).SetText("Relatorio de Vendas - Outubro 2025")
 				.AddStyle(26).SetTextAlign(TextAlignType.Center).SetColor(color).SetMarginBottom(25).SetFontWeight(FontWeight.Bold).DoneStyle()
 				.GetExportData().ToString(Formatting.None);
 
@@ -46,8 +46,8 @@ namespace Project.PDFGenerator.Tests
 		[Test]
 		public void TestJsonFooter()
 		{
-			const string expected = "{\"type\":\"footer\",\"text\":\"Propixel Games © 2025 — Relatórios automatizados via Unity\",\"style\":{\"font-size\":\"10px\",\"text-align\":\"center\",\"color\":\"#888888\",\"margin-top\":\"40px\"}}";
-			var actual = new PDFTextData(null).SetType(TextType.Footer).SetText("Propixel Games © 2025 — Relatórios automatizados via Unity")
+			const string expected = "{\"type\":\"footer\",\"text\":\"Propixel Games c 2025 - Relatorios automatizados via Unity\",\"style\":{\"font-size\":\"10px\",\"text-align\":\"center\",\"color\":\"#888888\",\"margin-top\":\"40px\"}}";
+			var actual = new PDFTextData(null).SetType(TextType.Footer).SetText("Propixel Games c 2025 - Relatorios automatizados via Unity")
 				.AddStyle(10).SetTextAlign(TextAlignType.Center).SetColor(PDFColorUtility.ParseHtmlString("#888")).SetMarginTop(40).DoneStyle()
 				.GetExportData().ToString(Formatting.None);
 			Assert.AreEqual(expected, actual, "Expected: {0}\n  Received: {1}", expected, actual);
