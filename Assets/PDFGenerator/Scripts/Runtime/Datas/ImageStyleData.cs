@@ -1,10 +1,11 @@
 using System;
 using Newtonsoft.Json.Linq;
+using UnityEngine;
 
 namespace Project.PDFGenerator
 {
 	[Serializable]
-	public class ImageStyleData : IExportable<JObject>
+	public class ImageStyleData : IExportable<JProperty>
 	{
 		private const string px = PDFConstants.k_Pixel;
 
@@ -14,6 +15,17 @@ namespace Project.PDFGenerator
 		public int width = 120;
 		public int height = 120;
 
+		// Optional
+		public Border<ImageStyleData> border;
+		public int borderRadius = 10;
+		public Color backgroundColor;
+		public int padding = 5;
+
+		public bool useBorder = false;
+		public bool useBorderRadius = false;
+		public bool useBackgroundColor = false;
+		public bool usePadding = false;
+
 		internal PDFImageData _parent;
 
 		public ImageStyleData() { }
@@ -21,6 +33,13 @@ namespace Project.PDFGenerator
 		public ImageStyleData(PDFImageData parent)
 		{
 			_parent = parent;
+			backgroundColor = PDFColorUtility.ParseHtmlString("EAF2F8");
+			border = new(this)
+			{
+				width = 2,
+				color = PDFColorUtility.ParseHtmlString("2E86C1"),
+				type = BorderType.Solid,
+			};
 		}
 
 		public ImageStyleData(PDFImageData parent, ImageDisplayType display, int margin, bool marginAuto, int width, int height) : this(parent)
@@ -62,24 +81,69 @@ namespace Project.PDFGenerator
 			return SetWidth(width).SetHeight(height);
 		}
 
+		public ImageStyleData SetBorder(int width, Color color, BorderType borderType = BorderType.Solid)
+		{
+			AddBorder().SetWidth(width).SetColor(color).SetType(borderType);
+			return this;
+		}
+
+		public Border<ImageStyleData> AddBorder()
+		{
+			this.border = new(this);
+			useBorder = true;
+			return border;
+		}
+
+		public ImageStyleData SetBorderRadius(int borderRadius)
+		{
+			this.borderRadius = borderRadius;
+			useBorderRadius = true;
+			return this;
+		}
+
+		public ImageStyleData SetBackgroundColor(Color backgroundColor)
+		{
+			this.backgroundColor = backgroundColor;
+			useBackgroundColor = true;
+			return this;
+		}
+
+		public ImageStyleData SetPadding(int padding)
+		{
+			this.padding = padding;
+			usePadding = true;
+			return this;
+		}
+
 		public PDFImageData DoneStyle()
 		{
 			return _parent;
 		}
 
-		public JObject GetExportData()
+		public JProperty GetExportData()
 		{
-			return new JObject()
+			//var export = new JProperty("style", new JObject
+			//{
+			//	{ "display", display.ToString().ToLower() },
+			//	{ "margin", $"{margin}{px}{(marginAuto ? " auto" : string.Empty)}" },
+			//	{ "width", $"{width}{px}" },
+			//	{ "height", $"{height}{px}" }
+			//});
+
+			var style = new JObject
 			{
-				{ "style", new JObject
-					{
-						{ "display", display.ToString().ToLower() },
-						{ "margin", $"{margin}{px}{(marginAuto ? " auto" : string.Empty)}" },
-						{ "width", $"{width}{px}" },
-						{ "height", $"{height}{px}" }
-					}
-				}
+				{ "display", display.ToString().ToLower() },
+				{ "margin", $"{margin}{px}{(marginAuto ? " auto" : string.Empty)}" },
+				{ "width", $"{width}{px}" },
+				{ "height", $"{height}{px}" }
 			};
+
+			if (useBorder) style.Add(border.GetExportData());
+			if (useBorderRadius) style.Add("border-radius", $"{borderRadius}{px}");
+			if (useBackgroundColor) style.Add("background-color", PDFColorUtility.ToHtmlStringRGB(backgroundColor));
+			if (usePadding) style.Add("padding", $"{padding}{px}");
+
+			return new JProperty("style", style);
 		}
 	}
 }

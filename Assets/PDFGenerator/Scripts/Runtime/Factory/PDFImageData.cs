@@ -74,7 +74,7 @@ namespace Project.PDFGenerator
 			{
 				new JProperty("type", type),
 				new JProperty("src", url),
-				new JProperty("style", style.GetExportData()),
+				style.GetExportData(),
 			};
 		}
 	}
