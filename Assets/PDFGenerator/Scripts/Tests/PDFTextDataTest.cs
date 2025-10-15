@@ -6,11 +6,9 @@ namespace Project.PDFGenerator.Tests
 {
 	public class PDFTextDataTest
 	{
-		// A Test behaves as an ordinary method
 		[Test]
 		public void TestJsonTitle()
 		{
-			// Use the Assert class to test conditions
 			const string expected = "{\"type\":\"title\",\"text\":\"Relatorio de Vendas - Outubro 2025\",\"style\":{\"font-size\":\"26px\",\"text-align\":\"center\",\"font-weight\":\"bold\",\"color\":\"#2E86C1\",\"margin-bottom\":\"25px\"}}";
 
 			ColorUtility.TryParseHtmlString("#2E86C1", out Color color);

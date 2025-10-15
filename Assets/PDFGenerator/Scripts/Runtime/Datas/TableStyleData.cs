@@ -42,6 +42,13 @@ namespace Project.PDFGenerator
 			return this;
 		}
 
+		public TableStyleData SetBorder(int width, Color color, BorderType borderType = BorderType.Solid)
+		{
+			border = new(this);
+			border.SetWidth(width).SetColor(color).SetType(borderType);
+			return this;
+		}
+
 		public Border<TableStyleData> AddBorder()
 		{
 			border = new(this);

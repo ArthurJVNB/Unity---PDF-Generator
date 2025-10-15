@@ -24,9 +24,9 @@ namespace Project.PDFGenerator
 			return this;
 		}
 
-		public TableCellStyleData SetBorder(int width, Color color)
+		public TableCellStyleData SetBorder(int width, Color color, BorderType borderType = BorderType.Solid)
 		{
-			return border.SetWidth(width).SetColor(color).DoneBorder();
+			return border.SetWidth(width).SetColor(color).SetType(borderType).DoneBorder();
 		}
 
 		public PDFTableData DoneStyle()

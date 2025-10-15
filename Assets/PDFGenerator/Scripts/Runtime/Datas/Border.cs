@@ -45,7 +45,7 @@ namespace Project.PDFGenerator
 
 		public JProperty GetExportData()
 		{
-			return new JProperty("border", $"{width}{px} {type.ToString().ToLower()} {ColorUtility.ToHtmlStringRGB(color)}"); // e.g. "1px solid #000000"
+			return new JProperty("border", $"{width}{px} {type.ToString().ToLower()} {PDFColorUtility.ToHtmlStringRGB(color)}"); // e.g. "1px solid #000000"
 		}
 	}
 }
