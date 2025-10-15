@@ -58,9 +58,9 @@ namespace Project.PDFGenerator
 		{
 			return new JProperty("headerStyle", new JObject()
 			{
-				new JProperty("background-color", ColorUtility.ToHtmlStringRGBA(backgroundColor)),
-				new JProperty("color", ColorUtility.ToHtmlStringRGBA(color)),
-				new JProperty("fontWeight", fontWeight.ToString().ToLower()),
+				new JProperty("background-color", PDFColorUtility.ToHtmlStringRGB(backgroundColor)),
+				new JProperty("color", PDFColorUtility.ToHtmlStringRGB(color)),
+				new JProperty("font-weight", fontWeight.ToString().ToLower()),
 				new JProperty("padding", $"{padding}{px}"),
 			});
 

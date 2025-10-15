@@ -53,8 +53,8 @@ namespace Project.PDFGenerator
 			JArray array = new();
 			foreach (Color color in backgroundColor)
 			{
-				//array.Add(new JProperty("background-color", ColorUtility.ToHtmlStringRGBA(color)));
-				array.Add(new JObject()["background-color"] = ColorUtility.ToHtmlStringRGBA(color));
+				array.Add(new JObject() { { "background-color", PDFColorUtility.ToHtmlStringRGB(color) } }); // "rowStyle":[{"background-color":"#ECF0F1"},{"background-color":"#FFFFFF"}]
+				//array.Add(new JObject()["background-color"] = PDFColorUtility.ToHtmlStringRGB(color)); // "rowStyle":["#ECF0F1","#FFFFFF"]
 			}
 
 			return new JProperty("rowStyle", array);

@@ -46,7 +46,7 @@ namespace Project.PDFGenerator
 			return new JObject()
 			{
 				new JProperty("type", type),
-				new JProperty("ordered", ordered.ToString().ToLower()),
+				new JProperty("ordered", ordered),
 				new JProperty("items", items),
 				new JProperty("style", style.GetExportData()),
 			};
