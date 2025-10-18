@@ -320,14 +320,24 @@ public class PdfTest : MonoBehaviour
 	{
 		get
 		{
-			return PDFJObjectFactory.Start()
-				.SetMargins(40).Done()
-				.AddImage("https://www.propixelgames.online/pdf/images/icon.png")
-					.AddStyle().SetHeight(120).SetDisplay(ImageDisplayType.InlineBlock).DoneStyle()
-				.Done()
+			return PDFJObjectFactory.Start(PageSize.A4, PageOrientation.Portrait)
+				.AddText(TextType.Title, "Relatório de Vendas (usando padrão Factory)")
+					.AddStyle(24).SetTextAlign(TextAlignType.Center).SetColor(PDFColorUtility.ParseHtmlString("#2E86C1")).DoneStyle()
+					.Done()
+				.AddText(TextType.Paragraph, "Teste Gerando via Unity + PHP usando padrão Factory")
+					.AddStyle(14).SetMarginBottom(10).DoneStyle()
+					.Done()
+				.AddImage("http://www.propixelgames.online/pdf/images/icon.png")
+					.AddStyle().SetDisplay(ImageDisplayType.Block).SetMargin(10, marginAuto: true).DoneStyle()
+					.Done()
+				.AddTable()
+					.SetHeader("Produto", "Quantidade", "Preço")
+					.AddRow("Nintendo Switch", "10", "R$2000")
+					.AddRow("Smash bross ultimate", "5", "R$400")
+					.AddRow("Pro Controller", "8", "R$300")
+					.AddStyle().SetWidthPercent(100).SetBorder(1, Color.black, BorderType.Solid).DoneStyle()
+					.Done()
 				.Create();
-
-			throw new System.NotImplementedException("FactoryExample2 not implemented yet.");
 		}
 	}
 	#endregion

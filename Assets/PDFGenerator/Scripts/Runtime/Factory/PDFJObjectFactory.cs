@@ -20,6 +20,16 @@ namespace Project.PDFGenerator
 			return new PDFJObjectFactory(page);
 		}
 
+		public static PDFJObjectFactory Start(PageSize pageSize = PageData.k_DefaultSize,
+										PageOrientation pageOrientation = PageData.k_DefaultOrientation,
+										int pageMarginVertical = PageData.k_DefaultMargin,
+										int pageMarginHorizontal = PageData.k_DefaultMargin)
+		{
+			var page = new PageData();
+			page.SetSize(pageSize).SetOrientation(pageOrientation).SetMargins(pageMarginVertical, pageMarginHorizontal);
+			return new PDFJObjectFactory(page);
+		}
+
 		private PDFJObjectFactory(PageData page)
 		{
 			page._parent = this;

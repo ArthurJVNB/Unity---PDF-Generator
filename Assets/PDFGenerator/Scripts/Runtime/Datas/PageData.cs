@@ -6,9 +6,13 @@ namespace Project.PDFGenerator
 	[Serializable]
 	public class PageData : IExportable<JObject>
 	{
-		public PageSize size = PageSize.A4;
-		public PageOrientation orientation = PageOrientation.Portrait;
-		public PageMargins margins = new();
+		public const PageSize k_DefaultSize = PageSize.A4;
+		public const PageOrientation k_DefaultOrientation = PageOrientation.Portrait;
+		public const int k_DefaultMargin = 40;
+
+		public PageSize size = k_DefaultSize;
+		public PageOrientation orientation = k_DefaultOrientation;
+		public PageMargins margins = new() { top = k_DefaultMargin, bottom = k_DefaultMargin, left = k_DefaultMargin, right = k_DefaultMargin };
 
 		internal PDFJObjectFactory _parent;
 
@@ -27,12 +31,12 @@ namespace Project.PDFGenerator
 			return this;
 		}
 
-		public PageData SetMargins(int top, int right, int bottom, int left)
+		public PageData SetMargins(int top, int bottom, int left, int right)
 		{
 			this.margins.top = top;
-			this.margins.right = right;
 			this.margins.bottom = bottom;
 			this.margins.left = left;
+			this.margins.right = right;
 			return this;
 		}
 
@@ -43,7 +47,7 @@ namespace Project.PDFGenerator
 
 		public PageData SetMargins(int vertical, int horizontal)
 		{
-			return SetMargins(vertical, horizontal, vertical, horizontal);
+			return SetMargins(vertical, vertical, horizontal, horizontal);
 		}
 
 		public PDFJObjectFactory Done()

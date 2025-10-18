@@ -7,14 +7,19 @@ namespace Project.PDFGenerator
 	[Serializable]
 	public class TableStyleData : IExportable<JProperty>
 	{
-		private string px = PDFConstants.k_Pixel;
+		public const int k_DefaultWidthPercent = 100;
+		public const int k_DefaultFontSize = 16;
+		public const TextAlignType k_DefaultTextAlign = TextAlignType.Left;
+		public const int k_DefaultMarginBottom = 20;
 
-		public int widthPercent = 100;
+		private const string px = PDFConstants.k_Pixel;
+
+		public int widthPercent = k_DefaultWidthPercent;
 		public Border<TableStyleData> border;
 		//public BorderColapseType borderColapse = BorderColapseType.Collapse; // not implemented
-		public int fontSize = 13;
-		public TextAlignType textAlign = TextAlignType.Center;
-		public int marginBottom = 20;
+		public int fontSize = k_DefaultFontSize;
+		public TextAlignType textAlign = k_DefaultTextAlign;
+		public int marginBottom = k_DefaultMarginBottom;
 
 		private PDFTableData _parent;
 
@@ -84,7 +89,7 @@ namespace Project.PDFGenerator
 			{
 				new JProperty("width", $"{widthPercent:0.##}%"),
 				border.GetExportData(),
-				new JProperty("border-collapse", "collapse"), // not implemented class
+				//new JProperty("border-collapse", "collapse"), // not implemented class
 				new JProperty("font-size", $"{fontSize}{px}"),
 				new JProperty("text-align", textAlign.ToString().ToLower()),
 				new JProperty("margin-bottom", $"{marginBottom}{px}")
