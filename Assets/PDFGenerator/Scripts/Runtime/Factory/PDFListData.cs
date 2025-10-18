@@ -14,7 +14,6 @@ namespace Project.PDFGenerator
 		public PDFListData(PDFJObjectFactory factory) : base(factory)
 		{
 			type = PDFConstants.k_ListType;
-			style = new(this);
 		}
 
 		public PDFListData SetOrdered(bool ordered)
@@ -29,11 +28,15 @@ namespace Project.PDFGenerator
 			return this;
 		}
 
+		public ListStyleData AddStyle()
+		{
+			style = new(this);
+			return style;
+		}
+
 		public ListStyleData AddStyle(int fontSize)
 		{
-			//style = new(this); // not necessary
-			style.fontSize = fontSize;
-			return style;
+			return AddStyle().SetFontSize(fontSize);
 		}
 
 		public override JObject GetExportData()
@@ -48,7 +51,7 @@ namespace Project.PDFGenerator
 				new JProperty("type", type),
 				new JProperty("ordered", ordered),
 				new JProperty("items", items),
-				new JProperty("style", style.GetExportData()),
+				new JProperty("style", style?.GetExportData() ?? new JObject()),
 			};
 		}
 	}
