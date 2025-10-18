@@ -13,8 +13,10 @@ namespace Project.PDFGenerator.Server
 		public event Action<PDFCreateCallback> OnRequestFailure;
 
 		[SerializeField] private PDFServerConfigurationData _serverConfigurationData;
+		[SerializeField] private SuccessBehaviourType _successBehaviourType = SuccessBehaviourType.EventsOnly;
 		[Tooltip("Optional.\n\nStored data that can later be used to send request.")]
-		[ContextMenuItem("Debug: Send PDF Request Stored Data", nameof(Debug_SendPDFRequestStoredData))]
+		[ContextMenuItem("Debug/Send PDF Request Stored Data", nameof(Debug_SendPDFRequestStoredData))]
+		[ContextMenuItem("Debug/Send PDF Request Stored Data (Using Callbacks) (Play Mode)", nameof(Debug_SendPDFRequestStoredData_UseCallback))]
 		[SerializeField] private PDFSendRequestData _storedData;
 
 		[Header("Events")]
@@ -22,6 +24,12 @@ namespace Project.PDFGenerator.Server
 		[SerializeField] private UnityEvent<PDFCreateCallback> _onRequestComplete;
 		[SerializeField] private UnityEvent<PDFCreateCallback> _onRequestSuccess;
 		[SerializeField] private UnityEvent<PDFCreateCallback> _onRequestFailure;
+
+		private enum SuccessBehaviourType
+		{
+			EventsOnly,
+			EventsAndOpenUrl,
+		}
 
 		#region Public: Set Stored Data
 		public void SetStoredData(PDFJObjectFactory pdfData)
@@ -66,7 +74,7 @@ namespace Project.PDFGenerator.Server
 		public void SendPDFRequestStoredData(Action<PDFCreateCallback> callback)
 		{
 			SetupStartRequest();
-			SendPDFRequest(_storedData.Data, requestCallback => Callback(requestCallback, callback));
+			SendPDFRequest(_storedData.Data, callback);
 		}
 		#endregion
 
@@ -81,6 +89,17 @@ namespace Project.PDFGenerator.Server
 		{
 			callback?.Invoke(requestCallback);
 			InvokeCallbackEvents(requestCallback);
+
+			if (!requestCallback.Success) return;
+			switch (_successBehaviourType)
+			{
+				case SuccessBehaviourType.EventsAndOpenUrl:
+					Application.OpenURL(requestCallback.PDFUrl);
+					break;
+				case SuccessBehaviourType.EventsOnly:
+				default:
+					break;
+			}
 		}
 
 		private void InvokeStartEvent()
@@ -107,7 +126,7 @@ namespace Project.PDFGenerator.Server
 		#endregion
 
 		#region Debug
-		[ContextMenu("Debug/Send PDF Request Stored Data")]
+		[ContextMenu("Debug/Send PDF Request Stored Data/No Callbacks")]
 		private void Debug_SendPDFRequestStoredData()
 		{
 			Debug.Log("<color=yellow>Debug:</color> Send PDF Request Stored Data");
@@ -120,7 +139,19 @@ namespace Project.PDFGenerator.Server
 			});
 		}
 
-		[ContextMenu("Debug/Send PDF Request Factory")]
+		[ContextMenu("Debug/Send PDF Request Stored Data/Using Callbacks (Play Mode)")]
+		private void Debug_SendPDFRequestStoredData_UseCallback()
+		{
+			if (!Application.isPlaying) return;
+			Debug.Log("<color=yellow>Debug:</color> Send PDF Request Stored Data (Using Callbacks)");
+			SendPDFRequestStoredData(callback =>
+			{
+				Debug.Log($"<color=yellow>Debug:</color> PDF Request Completed. Success: {callback.Success}. Url: {callback.PDFUrl}");
+				PDFServer.ConfigurationData = null;
+			});
+		}
+
+		[ContextMenu("Debug/Send PDF Request Factory/No Callbacks")]
 		private void Debug_SendPDFRequestFactory()
 		{
 			Debug.Log("<color=yellow>Debug:</color> Send PDF Request Stored Data");
@@ -158,7 +189,7 @@ namespace Project.PDFGenerator.Server
 			});
 		}
 
-		[ContextMenu("Debug/Send PDF Request Factory (Save on Stored Data)")]
+		[ContextMenu("Debug/Send PDF Request Factory/No Callbacks (Save on Stored Data)")]
 		private void Debug_SendPDFRequestFactory_SaveOnStoredData()
 		{
 			Debug.Log("<color=yellow>Debug:</color> Send PDF Request Stored Data");
