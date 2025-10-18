@@ -1,0 +1,59 @@
+{
+  "page": {
+    "size": "A4",
+    "orientation": "portrait"
+  },
+  "content": [
+    {
+      "type": "title",
+      "text": "Relatório de Vendas",
+      "style": {
+        "text-align": "center",
+        "color": "#2E86C1",
+        "font-size": "24px",
+        "margin-bottom": "20px"
+      }
+    },
+    {
+      "type": "paragraph",
+      "text": "Teste Gerando via Unity + PHP",
+      "style": {
+        "font-size": "14px",
+        "margin-bottom": "15px"
+      }
+    },
+    {
+      "type": "image",
+      "src": "http://www.propixelgames.online/pdf/images/icon.png",
+      "style": {
+        "display": "block",
+        "margin": "10px auto",
+        "width": "300px"
+      }
+    },
+    {
+      "type": "table",
+      "header": ["Produto", "Quantidade", "Preço"],
+      "rows": [
+        ["Nintendo Switch", "10", "R$2000"],
+        ["Smash Bros Ultimate", "5", "R$400"],
+        ["Pro Controller", "8", "R$300"],
+        ["Jogos Diversos", "12", "R$1500"]
+      ],
+      "style": {
+        "width": "100%",
+        "border-collapse": "collapse",
+        "margin-top": "20px"
+      },
+      "rowStyle": [
+        {"background-color": "#f2f2f2"},
+        {"background-color": "#ffffff"}
+      ],
+      "headerStyle": {
+        "background-color": "#2E86C1",
+        "color": "#ffffff",
+        "font-weight": "bold"
+      }
+    }
+  ]
+}
