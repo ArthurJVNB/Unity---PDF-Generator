@@ -1,18 +1,17 @@
 using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
-using UnityEngine;
 
 namespace Project.PDFGenerator
 {
 	public class PDFJObjectFactory
 	{
-		private PageData m_Page;
-		private List<BasePDFData> m_Datas;
+		private readonly PageData _page;
+		private readonly List<BasePDFData> _datas;
 
 		public static PageData Start()
 		{
 			var factory = new PDFJObjectFactory(new PageData());
-			return factory.m_Page;
+			return factory._page;
 		}
 
 		public static PDFJObjectFactory Start(PageData page)
@@ -33,15 +32,15 @@ namespace Project.PDFGenerator
 		private PDFJObjectFactory(PageData page)
 		{
 			page._parent = this;
-			m_Page = page;
-			m_Datas = new List<BasePDFData>();
+			_page = page;
+			_datas = new List<BasePDFData>();
 		}
 
 		#region AddText
 		public PDFTextData AddText()
 		{
 			var data = new PDFTextData(this);
-			m_Datas.Add(data);
+			_datas.Add(data);
 			return data;
 		}
 
@@ -85,7 +84,7 @@ namespace Project.PDFGenerator
 		public PDFImageData AddImage()
 		{
 			var data = new PDFImageData(this);
-			m_Datas.Add(data);
+			_datas.Add(data);
 			return data;
 		}
 		#endregion
@@ -94,7 +93,7 @@ namespace Project.PDFGenerator
 		public PDFListData AddList()
 		{
 			var data = new PDFListData(this);
-			m_Datas.Add(data);
+			_datas.Add(data);
 			return data;
 		}
 		#endregion
@@ -103,7 +102,7 @@ namespace Project.PDFGenerator
 		public PDFTableData AddTable()
 		{
 			var data = new PDFTableData(this);
-			m_Datas.Add(data);
+			_datas.Add(data);
 			return data;
 		}
 		#endregion
@@ -121,9 +120,9 @@ namespace Project.PDFGenerator
 			//return result;
 			#endregion
 
-			var page = m_Page.GetExportData();
+			var page = _page.GetExportData();
 			var content = new JArray();
-			foreach (var item in m_Datas)
+			foreach (var item in _datas)
 				content.Add(item.GetExportData());
 			return new JObject(
 				new JProperty("page", page),
