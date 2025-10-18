@@ -57,20 +57,20 @@ namespace Project.PDFGenerator
 			return AddImage().SetUrl(url);
 		}
 
-		public PDFImageData AddImage(string url, Rect rect)
-		{
-			return AddImage(url).SetPosition(rect.x, rect.y).SetSize(rect.width, rect.height);
-		}
+		//public PDFImageData AddImage(string url, Rect rect)
+		//{
+		//	return AddImage(url).SetPosition(rect.x, rect.y).SetSize(rect.width, rect.height);
+		//}
 
-		public PDFImageData AddImage(Rect rect)
-		{
-			return AddImage().SetPosition(rect.x, rect.y).SetSize(rect.width, rect.height);
-		}
+		//public PDFImageData AddImage(Rect rect)
+		//{
+		//	return AddImage().SetPosition(rect.x, rect.y).SetSize(rect.width, rect.height);
+		//}
 
-		public PDFImageData AddImage(float x, float y)
-		{
-			return AddImage().SetPosition(x, y);
-		}
+		//public PDFImageData AddImage(float x, float y)
+		//{
+		//	return AddImage().SetPosition(x, y);
+		//}
 
 		public PDFImageData AddImage()
 		{

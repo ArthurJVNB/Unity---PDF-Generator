@@ -7,17 +7,37 @@ namespace Project.PDFGenerator
 	[Serializable]
 	public class Border<TParent> : IExportable<JProperty>
 	{
+		public const int k_DefaultWidth = 1;
+		public const BorderType k_DefaultType = BorderType.Solid;
+		public readonly static Color k_DefaultColor = Color.black;
+
 		private const string px = PDFConstants.k_Pixel;
 
-		public int width = 1;
-		public BorderType type = BorderType.Solid;
-		public Color color = Color.black;
+		public int width = k_DefaultWidth;
+		public BorderType type = k_DefaultType;
+		public Color color = k_DefaultColor;
 
 		internal TParent _parent;
 
 		public Border(TParent parent)
 		{
 			_parent = parent;
+		}
+
+		public Border<TParent> SetBorder(int width, BorderType type, Color color)
+		{
+			SetWidth(width);
+			SetType(type);
+			SetColor(color);
+			return this;
+		}
+
+		public Border<TParent> SetDefaultValues()
+		{
+			SetWidth(k_DefaultWidth);
+			SetType(k_DefaultType);
+			SetColor(k_DefaultColor);
+			return this;
 		}
 
 		public Border<TParent> SetWidth(int width)
