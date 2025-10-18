@@ -148,9 +148,45 @@ namespace Project.PDFGenerator.Server
 			//		.AddStyle().SetWidthPercent(100).SetBorder(1, Color.black, BorderType.Solid).DoneStyle()
 			//		.Done();
 
-			SetStoredData(factory);
+			//SetStoredData(factory);
 
-			//return;
+			PDFServer.Send(factory, callback =>
+			{
+				Debug.Log($"<color=yellow>Debug:</color> PDF Request Completed. Success: {callback.Success}. Url: {callback.PDFUrl}");
+				if (callback.Success) Application.OpenURL(callback.PDFUrl);
+				PDFServer.ConfigurationData = null;
+			});
+		}
+
+		[ContextMenu("Debug/Send PDF Request Factory (Save on Stored Data)")]
+		private void Debug_SendPDFRequestFactory_SaveOnStoredData()
+		{
+			Debug.Log("<color=yellow>Debug:</color> Send PDF Request Stored Data");
+			PDFServer.ConfigurationData = _serverConfigurationData;
+
+			PDFJObjectFactory factory = PDFJObjectFactory.Start(PageSize.A4, PageOrientation.Portrait)
+				.AddText(TextType.Title, "Debug PDF (PDFSendBehaviour)").Done()
+				.AddText(TextType.Paragraph, "This is a debug paragraph added to the PDF, sent from PDFSendBehaviour.").Done();
+
+			//PDFJObjectFactory factory = PDFJObjectFactory.Start(PageSize.A4, PageOrientation.Portrait)
+			//	.AddText(TextType.Title, "Relatório de Vendas (usando PDFSendBehaviour)")
+			//		.AddStyle(24).SetTextAlign(TextAlignType.Center).SetColor(PDFColorUtility.ParseHtmlString("#2E86C1")).DoneStyle()
+			//		.Done()
+			//	.AddText(TextType.Paragraph, "Teste Gerando via Unity + PHP usando PDFSendBehaviour")
+			//		.AddStyle(14).SetMarginBottom(10).DoneStyle()
+			//		.Done()
+			//	.AddImage("http://www.propixelgames.online/pdf/images/icon.png")
+			//		.AddStyle().SetDisplay(ImageDisplayType.Block).SetMargin(10, marginAuto: true).DoneStyle()
+			//		.Done()
+			//	.AddTable()
+			//		.SetHeader("Produto", "Quantidade", "Preço")
+			//		.AddRow("Nintendo Switch", "10", "R$2000")
+			//		.AddRow("Smash bross ultimate", "5", "R$400")
+			//		.AddRow("Pro Controller", "8", "R$300")
+			//		.AddStyle().SetWidthPercent(100).SetBorder(1, Color.black, BorderType.Solid).DoneStyle()
+			//		.Done();
+
+			SetStoredData(factory);
 
 			PDFServer.Send(factory, callback =>
 			{
