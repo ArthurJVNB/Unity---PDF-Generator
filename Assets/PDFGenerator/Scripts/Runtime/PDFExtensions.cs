@@ -8,5 +8,12 @@ namespace Project.PDFGenerator
 		{
 			return value.ToString(new CultureInfo("en-US"));
 		}
+
+		public static string ToStringPDF(this ImageDisplayType display)
+		{
+			if (display == ImageDisplayType.InlineBlock)
+				return "inline-block";
+			return display.ToString().ToLower();
+		}
 	}
 }

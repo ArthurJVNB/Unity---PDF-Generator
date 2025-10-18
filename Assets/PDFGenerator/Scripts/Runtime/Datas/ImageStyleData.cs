@@ -7,20 +7,27 @@ namespace Project.PDFGenerator
 	[Serializable]
 	public class ImageStyleData : IExportable<JProperty>
 	{
+		public const ImageDisplayType k_DefaultDisplayType = ImageDisplayType.Block;
+		public const bool k_DefaultMarginAuto = true;
+
 		private const string px = PDFConstants.k_Pixel;
 
-		public ImageDisplayType display = ImageDisplayType.Block;
-		public int margin = 10;
-		public bool marginAuto = true;
-		public int width = 120;
-		public int height = 120;
+		// Required
+		public ImageDisplayType display = k_DefaultDisplayType;
 
 		// Optional
+		public int margin = 10;
+		public bool marginAuto;
+		public int width = 120;
+		public int height = 120;
 		public Border<ImageStyleData> border;
 		public int borderRadius = 10;
 		public Color backgroundColor;
 		public int padding = 5;
 
+		public bool useMargin = false;
+		public bool useWidth = false;
+		public bool useHeight = false;
 		public bool useBorder = false;
 		public bool useBorderRadius = false;
 		public bool useBackgroundColor = false;
@@ -57,22 +64,25 @@ namespace Project.PDFGenerator
 			return this;
 		}
 
-		public ImageStyleData SetMargin(int margin, bool marginAuto = true)
+		public ImageStyleData SetMargin(int margin, bool marginAuto = k_DefaultMarginAuto)
 		{
 			this.margin = margin;
 			this.marginAuto = marginAuto;
+			useMargin = true;
 			return this;
 		}
 
 		public ImageStyleData SetWidth(int width)
 		{
 			this.width = width;
+			useWidth = true;
 			return this;
 		}
 
 		public ImageStyleData SetHeight(int height)
 		{
 			this.height = height;
+			useHeight = true;
 			return this;
 		}
 
@@ -89,7 +99,7 @@ namespace Project.PDFGenerator
 
 		public Border<ImageStyleData> AddBorder()
 		{
-			this.border = new(this);
+			border = new(this);
 			useBorder = true;
 			return border;
 		}
@@ -132,12 +142,15 @@ namespace Project.PDFGenerator
 
 			var style = new JObject
 			{
-				{ "display", display.ToString().ToLower() },
-				{ "margin", $"{margin}{px}{(marginAuto ? " auto" : string.Empty)}" },
-				{ "width", $"{width}{px}" },
-				{ "height", $"{height}{px}" }
+				{ "display", display.ToStringPDF() },
+				//{ "margin", $"{margin}{px}{(marginAuto ? " auto" : string.Empty)}" },
+				//{ "width", $"{width}{px}" },
+				//{ "height", $"{height}{px}" }
 			};
 
+			if (useMargin) style.Add("margin", $"{margin}{px}{(marginAuto ? " auto" : string.Empty)}");
+			if (useWidth) style.Add("width", $"{width}{px}");
+			if (useHeight) style.Add("height", $"{height}{px}");
 			if (useBorder) style.Add(border.GetExportData());
 			if (useBorderRadius) style.Add("border-radius", $"{borderRadius}{px}");
 			if (useBackgroundColor) style.Add("background-color", PDFColorUtility.ToHtmlStringRGB(backgroundColor));
