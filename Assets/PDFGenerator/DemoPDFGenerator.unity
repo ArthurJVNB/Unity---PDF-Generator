@@ -256,6 +256,71 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!1 &820857718
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 820857720}
+  - component: {fileID: 820857719}
+  m_Layer: 0
+  m_Name: PDFSendBehaviour
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &820857719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 820857718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe841b95cf1ea5f42b9b78a0ac81cb76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _serverConfigurationData: {fileID: 11400000, guid: 55c2ed203546dde47860fe983f5edb26, type: 2}
+  _storedData:
+    _data: "{\r\n  \"page\": {\r\n    \"size\": \"A4\",\r\n    \"orientation\": \"portrait\",\r\n   
+      \"margins\": {\r\n      \"top\": 40,\r\n      \"right\": 40,\r\n      \"bottom\":
+      40,\r\n      \"left\": 40\r\n    }\r\n  },\r\n  \"content\": [\r\n    {\r\n     
+      \"type\": \"title\",\r\n      \"text\": \"Debug PDF (PDFSendBehaviour)\",\r\n     
+      \"style\": {}\r\n    },\r\n    {\r\n      \"type\": \"paragraph\",\r\n     
+      \"text\": \"This is a debug paragraph added to the PDF, sent from PDFSendBehaviour.\",\r\n     
+      \"style\": {}\r\n    }\r\n  ]\r\n}"
+  _onRequestStarted:
+    m_PersistentCalls:
+      m_Calls: []
+  _onRequestComplete:
+    m_PersistentCalls:
+      m_Calls: []
+  _onRequestSuccess:
+    m_PersistentCalls:
+      m_Calls: []
+  _onRequestFailure:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!4 &820857720
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 820857718}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &846100714
 GameObject:
   m_ObjectHideFlags: 0
@@ -429,3 +494,4 @@ SceneRoots:
   - {fileID: 669301475}
   - {fileID: 846100716}
   - {fileID: 1198942592}
+  - {fileID: 820857720}

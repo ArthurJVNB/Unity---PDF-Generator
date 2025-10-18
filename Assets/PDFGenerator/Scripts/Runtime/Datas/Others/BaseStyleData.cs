@@ -7,10 +7,8 @@ namespace Project.PDFGenerator
 	{
 		private const string px = PDFConstants.k_Pixel;
 
-		// Mandatory
-		public int fontSize;
-
 		// Optional
+		public int fontSize;
 		public TextFontStyleType fontStyle = TextFontStyleType.Normal;
 		public TextAlignType textAlign = TextAlignType.Left;
 		public FontWeight fontWeight = FontWeight.Regular;
@@ -21,6 +19,7 @@ namespace Project.PDFGenerator
 		public int marginLeft;
 		public int marginRight;
 
+		public bool useFontSize = false;
 		public bool useFontStyle = false;
 		public bool useTextAlign = false;
 		public bool useFontWeight = false;
@@ -41,12 +40,13 @@ namespace Project.PDFGenerator
 
 		public BaseStyleData(TParent parent, int fontSize) : this(parent)
 		{
-			this.fontSize = fontSize;
+			SetFontSize(fontSize);
 		}
 
 		public BaseStyleData<TParent> SetFontSize(int fontSize)
 		{
 			this.fontSize = fontSize;
+			useFontSize = true;
 			return this;
 		}
 
@@ -120,11 +120,9 @@ namespace Project.PDFGenerator
 
 		public virtual JObject GetExportData()
 		{
-			var style = new JObject
-			{
-				["font-size"] = $"{fontSize}{px}"
-			};
-
+			var style = new JObject();
+			
+			if (useFontSize) style.Add("font-size", $"{fontSize}{px}");
 			if (useFontStyle) style.Add("font-style", fontStyle.ToString().ToLower());
 			if (useTextAlign) style.Add("text-align", textAlign.ToString().ToLower());
 			if (useFontWeight) style.Add("font-weight", fontWeight.ToString().ToLower());

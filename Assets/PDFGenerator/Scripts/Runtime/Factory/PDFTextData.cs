@@ -26,19 +26,25 @@ namespace Project.PDFGenerator
 			return this;
 		}
 
-		public TextStyleData AddStyle(int fontSize = PDFConstants.k_DefaultFontSize)
+		public TextStyleData AddStyle()
 		{
-			style = new TextStyleData(this, fontSize);
+			style = new TextStyleData(this);
 			return style;
+		}
+
+		public TextStyleData AddStyle(int fontSize)
+		{
+			return (TextStyleData)AddStyle().SetFontSize(fontSize);
 		}
 
 		public override JObject GetExportData()
 		{
+			//style ??= new(this);
 			return new JObject()
 			{
 				new JProperty("type", type),
 				new JProperty("text", text),
-				new JProperty("style", style.GetExportData()),
+				new JProperty("style", style?.GetExportData() ?? new JObject()),
 			};
 		}
 	}
