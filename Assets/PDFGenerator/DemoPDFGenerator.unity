@@ -286,6 +286,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _serverConfigurationData: {fileID: 11400000, guid: 55c2ed203546dde47860fe983f5edb26, type: 2}
+  _successBehaviourType: 0
   _storedData:
     _data: "{\r\n  \"page\": {\r\n    \"size\": \"A4\",\r\n    \"orientation\": \"portrait\",\r\n   
       \"margins\": {\r\n      \"top\": 40,\r\n      \"right\": 40,\r\n      \"bottom\":
@@ -294,6 +295,7 @@ MonoBehaviour:
       \"style\": {}\r\n    },\r\n    {\r\n      \"type\": \"paragraph\",\r\n     
       \"text\": \"This is a debug paragraph added to the PDF, sent from PDFSendBehaviour
       using Stored Data.\",\r\n      \"style\": {}\r\n    }\r\n  ]\r\n}"
+  _lastPdfUrl: https://www.propixelgames.online/pdf/pdfs/pdf_20251018_225509_3ce2cd.pdf
   _onRequestStarted:
     m_PersistentCalls:
       m_Calls: []

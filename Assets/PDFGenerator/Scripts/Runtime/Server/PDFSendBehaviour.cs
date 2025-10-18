@@ -18,6 +18,10 @@ namespace Project.PDFGenerator.Server
 		[ContextMenuItem("Debug/Send PDF Request Stored Data", nameof(Debug_SendPDFRequestStoredData))]
 		[ContextMenuItem("Debug/Send PDF Request Stored Data (Using Callbacks) (Play Mode)", nameof(Debug_SendPDFRequestStoredData_UseCallback))]
 		[SerializeField] private PDFSendRequestData _storedData;
+		[Tooltip("Last PDF URL received from server. It will always be replaced by the newest request. " +
+			"So, if the last connection failed, the previous successful PDF will be lost.")]
+		[ContextMenuItem("Open Last PDF", nameof(OpenLastPDF))]
+		[SerializeField] private string _lastPDFUrl;
 
 		[Header("Events")]
 		[SerializeField] private UnityEvent _onRequestStarted;
@@ -29,6 +33,14 @@ namespace Project.PDFGenerator.Server
 		{
 			EventsOnly,
 			EventsAndOpenUrl,
+		}
+
+		public string LastPDFUrl => _lastPDFUrl;
+
+		[ContextMenu("Open Last PDF")]
+		public void OpenLastPDF()
+		{
+			Application.OpenURL(_lastPDFUrl);
 		}
 
 		#region Public: Set Stored Data
@@ -87,6 +99,8 @@ namespace Project.PDFGenerator.Server
 
 		private void Callback(PDFCreateCallback requestCallback, Action<PDFCreateCallback> callback)
 		{
+			_lastPDFUrl = requestCallback.PDFUrl;
+
 			callback?.Invoke(requestCallback);
 			InvokeCallbackEvents(requestCallback);
 
@@ -94,7 +108,7 @@ namespace Project.PDFGenerator.Server
 			switch (_successBehaviourType)
 			{
 				case SuccessBehaviourType.EventsAndOpenUrl:
-					Application.OpenURL(requestCallback.PDFUrl);
+					OpenLastPDF();
 					break;
 				case SuccessBehaviourType.EventsOnly:
 				default:
