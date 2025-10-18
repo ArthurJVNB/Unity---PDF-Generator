@@ -45,7 +45,9 @@ namespace Project.PDFGenerator.Server
 
 		public static void Send(string pdfData, Action<PDFCreateCallback> callback)
 		{
-			WebRequest.Post(ConfigurationData.PostCreatePdfFullPath, token: null, pdfData, request => callback?.Invoke(new PDFCreateCallback(request)));
+			WWWForm form = new();
+			form.AddField("json", pdfData);
+			WebRequest.Post(ConfigurationData.PostCreatePdfFullPath, token: null, form, request => callback?.Invoke(new PDFCreateCallback(request)));
 		}
 
 		//private void Awake()

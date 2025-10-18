@@ -292,8 +292,8 @@ MonoBehaviour:
       40,\r\n      \"left\": 40\r\n    }\r\n  },\r\n  \"content\": [\r\n    {\r\n     
       \"type\": \"title\",\r\n      \"text\": \"Debug PDF (PDFSendBehaviour)\",\r\n     
       \"style\": {}\r\n    },\r\n    {\r\n      \"type\": \"paragraph\",\r\n     
-      \"text\": \"This is a debug paragraph added to the PDF, sent from PDFSendBehaviour.\",\r\n     
-      \"style\": {}\r\n    }\r\n  ]\r\n}"
+      \"text\": \"This is a debug paragraph added to the PDF, sent from PDFSendBehaviour
+      using Stored Data.\",\r\n      \"style\": {}\r\n    }\r\n  ]\r\n}"
   _onRequestStarted:
     m_PersistentCalls:
       m_Calls: []
