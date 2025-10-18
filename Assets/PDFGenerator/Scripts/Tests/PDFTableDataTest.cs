@@ -10,7 +10,7 @@ namespace Project.PDFGenerator.Tests
 		public void TestJson()
 		{
 			const string expected = "{\"type\":\"table\",\"header\":[\"Produto\",\"Quantidade\",\"Preco\",\"Total\"],\"rows\":[[\"Notebook\",\"2\",\"R$ 3.500\",\"R$ 7.000\"],[\"Mouse Gamer\",\"5\",\"R$ 150\",\"R$ 750\"]," +
-				"[\"Teclado Mecanico\",\"3\",\"R$ 400\",\"R$ 1.200\"]],\"style\":{\"width\":\"100%\",\"border\":\"1px solid #000000\",\"border-collapse\":\"collapse\",\"font-size\":\"13px\",\"text-align\":\"center\"," +
+				"[\"Teclado Mecanico\",\"3\",\"R$ 400\",\"R$ 1.200\"]],\"style\":{\"width\":\"100%\",\"border\":\"1px solid #000000\",\"font-size\":\"13px\",\"text-align\":\"center\"," +
 				"\"margin-bottom\":\"20px\"},\"headerStyle\":{\"background-color\":\"#2E86C1\",\"color\":\"#FFFFFF\",\"font-weight\":\"bold\",\"padding\":\"6px\"},\"cellStyle\":{\"border\":\"1px solid #000000\",\"padding\":\"5px\"}," +
 				"\"rowStyle\":[{\"background-color\":\"#ECF0F1\"},{\"background-color\":\"#FFFFFF\"}]}";
 			var actual = new PDFTableData(null).SetHeader("Produto", "Quantidade", "Preco", "Total")
@@ -27,7 +27,7 @@ namespace Project.PDFGenerator.Tests
 		[Test]
 		public void TestJsonStyle()
 		{
-			const string expected = "\"style\":{\"width\":\"100%\",\"border\":\"1px solid #000000\",\"border-collapse\":\"collapse\",\"font-size\":\"13px\",\"text-align\":\"center\",\"margin-bottom\":\"20px\"}";
+			const string expected = "\"style\":{\"width\":\"100%\",\"border\":\"1px solid #000000\",\"font-size\":\"13px\",\"text-align\":\"center\",\"margin-bottom\":\"20px\"}";
 			var actual = new TableStyleData(null).SetWidthPercent(100).SetBorder(1, PDFColorUtility.ParseHtmlString("000"), BorderType.Solid).SetFontSize(13).SetTextAlign(TextAlignType.Center).SetMarginBottom(20)
 				.GetExportData().ToString(Formatting.None);
 			Assert.AreEqual(expected, actual, "Expected: {0}\n  Received: {1}", expected, actual);

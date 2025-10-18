@@ -50,5 +50,13 @@ namespace Project.PDFGenerator.Tests
 				.GetExportData().ToString(Formatting.None);
 			Assert.AreEqual(expected, actual, "Expected: {0}\n  Received: {1}", expected, actual);
 		}
+
+		[Test]
+		public void TestJsonNoStyle()
+		{
+			const string expected = "{\"type\":\"paragraph\",\"text\":\"Text without style\",\"style\":{}}";
+			var actual = new PDFTextData(null).SetType(TextType.Paragraph).SetText("Text without style").GetExportData().ToString(Formatting.None);
+			Assert.AreEqual(expected, actual, "Expected: {0}\n  Received: {1}", expected, actual);
+		}
 	}
 }

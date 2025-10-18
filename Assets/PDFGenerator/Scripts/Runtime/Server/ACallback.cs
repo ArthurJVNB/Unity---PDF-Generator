@@ -11,7 +11,7 @@ namespace Project.PDFGenerator.Server
 		{
 			Success = webRequest.result == UnityWebRequest.Result.Success;
 			StatusCode = (int)webRequest.responseCode;
-			ResolveData(webRequest.downloadHandler.text);
+			ResolveData(webRequest.downloadHandler?.text);
 		}
 
 		protected virtual void ResolveData(string data) { }
