@@ -23,6 +23,12 @@ namespace Project.PDFGenerator
 			rowStyle = new(this);
 		}
 
+		public PDFTableData SetId(string id)
+		{
+			this.id = id;
+			return this;
+		}
+
 		public PDFTableData SetHeader(List<string> header)
 		{
 			this.header = header;
@@ -32,6 +38,18 @@ namespace Project.PDFGenerator
 		public PDFTableData SetHeader(params string[] header)
 		{
 			return SetHeader(new List<string>(header));
+		}
+
+		public PDFTableData AddHeader(string header)
+		{
+			this.header.Add(header);
+			return this;
+		}
+
+		public PDFTextData AddHeaders(params string[] headers)
+		{
+			header.AddRange(headers);
+			return null;
 		}
 
 		public PDFTableData AddRow(List<string> row)

@@ -15,6 +15,12 @@ namespace Project.PDFGenerator
 			style = new(this);
 		}
 
+		public PDFImageData SetId(string id)
+		{
+			this.id = id;
+			return this;
+		}
+
 		public PDFImageData SetUrl(string url)
 		{
 			this.url = url;

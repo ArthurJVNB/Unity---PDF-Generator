@@ -29,5 +29,26 @@ namespace Project.PDFGenerator.Tests
 				.GetExportData().ToString(Formatting.None);
 			Assert.AreEqual(expected, actual, "Expected: {0}\n  Received: {1}", expected, actual);
 		}
+
+		[Test]
+		public void TestId()
+		{
+			const string Id = "image_01";
+			var factory = PDFJObjectFactory.Start().Done().AddImage("image url").SetId(Id).Done();
+			Assert.IsTrue(factory.TryGetById(Id, out PDFImageData _), $"Data with ID '{Id}' not found.");
+		}
+
+		[Test]
+		public void TestIdUpdateData()
+		{
+			const string Id = "image_01";
+			var factory = PDFJObjectFactory.Start(PageSize.A4, PageOrientation.Portrait).AddImage("wrong url").SetId(Id).Done();
+			var data = factory[Id] as PDFImageData;
+			Assert.IsNotNull(data, $"Data with ID '{Id}' not found.");
+
+			const string NewValue = "correct url";
+			data.SetUrl(NewValue);
+			Assert.AreEqual(NewValue, data.url, "Image content was not updated correctly.");
+		}
 	}
 }
