@@ -57,5 +57,35 @@ namespace Project.PDFGenerator.Tests
 			var actual = new TableRowStyleData(null).AddBackgroundColor(PDFColorUtility.ParseHtmlString("ECF0F1")).AddBackgroundColor(PDFColorUtility.ParseHtmlString("#FFFFFF")).GetExportData().ToString(Formatting.None);
 			Assert.AreEqual(expected, actual, "Expected: {0}\n  Received: {1}", expected, actual);
 		}
+
+		[Test]
+		public void TestId()
+		{
+			const string Id = "table_01";
+			var factory = PDFJObjectFactory.Start().Done().AddTable().SetHeader("Header 1", "Header 2").SetId(Id).Done();
+			Assert.IsTrue(factory.TryGetById(Id, out PDFTableData _), $"Data with ID '{Id}' not found.");
+		}
+
+		[Test]
+		public void TestIdUpdateData()
+		{
+			const string Id = "text_01";
+			var factory = PDFJObjectFactory.Start().Done().AddTable().SetHeader("Old Header 1", "Old Header 2").AddRow("Value 1", "Value 2").SetId(Id).Done();
+			var data = factory[Id] as PDFTableData;
+			Assert.IsNotNull(data, $"Data with ID '{Id}' not found.");
+
+			string[] newHeader = new string[] { "New Header 1", "New Header 2" };
+			data.SetHeader(newHeader);
+			Assert.AreEqual(newHeader.Length, data.header.Count, "Table header content was not updated correctly.");
+			for (int i = 0; i < data.header.Count; i++)
+				Assert.AreEqual(newHeader[i], data.header[i], "Table header content was not updated correctly.");
+
+			string[] newRow = new string[] { "New Value 1", "New Value 2" };
+			data.AddRow(newRow);
+			Assert.AreEqual(2, data.rows.Count, "Table row count was not updated correctly.");
+			for (int i = 2; i < data.rows.Count; i++)
+				for (int j = 0; j < data.rows[i].Count; j++)
+					Assert.AreEqual(newRow[j], data.rows[i][j], "Table row content was not updated correctly.");
+		}
 	}
 }
