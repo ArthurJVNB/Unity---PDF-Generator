@@ -7,10 +7,6 @@ namespace Project.PDFGenerator
 	public class PDFImageData : BasePDFData
 	{
 		public string url;
-		//public float width = 100;
-		//public float height = 100;
-		//public float x;
-		//public float y;
 		public ImageStyleData style;
 
 		public PDFImageData(PDFJObjectFactory factory) : base(factory)
@@ -24,30 +20,6 @@ namespace Project.PDFGenerator
 			this.url = url;
 			return this;
 		}
-
-		//public PDFImageData SetWidth(float width)
-		//{
-		//	this.width = width;
-		//	return this;
-		//}
-
-		//public PDFImageData SetHeight(float height)
-		//{
-		//	this.height = height;
-		//	return this;
-		//}
-
-		//public PDFImageData SetSize(float width, float height)
-		//{
-		//	return SetWidth(width).SetHeight(height);
-		//}
-
-		//public PDFImageData SetPosition(float x, float y)
-		//{
-		//	this.x = x;
-		//	this.y = y;
-		//	return this;
-		//}
 
 		public ImageStyleData AddStyle()
 		{
