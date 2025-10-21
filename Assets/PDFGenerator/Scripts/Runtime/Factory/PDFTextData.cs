@@ -14,6 +14,12 @@ namespace Project.PDFGenerator
 			type = PDFConstants.k_TextType;
 		}
 
+		public PDFTextData SetId(string id)
+		{
+			this.id = id;
+			return this;
+		}
+
 		public PDFTextData SetText(string text)
 		{
 			this.text = text;
