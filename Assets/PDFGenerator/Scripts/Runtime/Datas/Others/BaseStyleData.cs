@@ -30,7 +30,7 @@ namespace Project.PDFGenerator
 		public bool useMarginLeft = false;
 		public bool useMarginRight = false;
 
-		protected TParent _parent;
+		internal TParent _parent;
 
 		public BaseStyleData(TParent parent)
 		{

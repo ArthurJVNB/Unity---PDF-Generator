@@ -73,9 +73,23 @@ namespace Project.PDFGenerator
 			return style.SetFontSize(fontSize);
 		}
 
+		public PDFTableData SetStyle(TableStyleData style)
+		{
+			style._parent = this;
+			this.style = style;
+			return this;
+		}
+
 		public TableHeaderStyleData AddHeaderStyle()
 		{
 			return headerStyle;
+		}
+
+		public PDFTableData SetHeaderStyle(TableHeaderStyleData headerStyle)
+		{
+			headerStyle._parent = this;
+			this.headerStyle = headerStyle;
+			return this;
 		}
 
 		public TableCellStyleData AddCellStyle()
@@ -83,9 +97,23 @@ namespace Project.PDFGenerator
 			return cellStyle;
 		}
 
+		public PDFTableData SetCellStyle(TableCellStyleData cellStyle)
+		{
+			cellStyle._parent = this;
+			this.cellStyle = cellStyle;
+			return this;
+		}
+
 		public TableRowStyleData AddRowStyle()
 		{
 			return rowStyle;
+		}
+
+		public PDFTableData SetRowStyle(TableRowStyleData rowStyle)
+		{
+			rowStyle._parent = this;
+			this.rowStyle = rowStyle;
+			return this;
 		}
 
 		public override JObject GetExportData()

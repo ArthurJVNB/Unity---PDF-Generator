@@ -21,7 +21,7 @@ namespace Project.PDFGenerator
 		public TextAlignType textAlign = k_DefaultTextAlign;
 		public int marginBottom = k_DefaultMarginBottom;
 
-		private PDFTableData _parent;
+		internal PDFTableData _parent;
 
 		public TableStyleData(PDFTableData parent)
 		{

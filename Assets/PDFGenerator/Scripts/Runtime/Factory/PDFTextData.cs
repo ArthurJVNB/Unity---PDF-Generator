@@ -43,6 +43,13 @@ namespace Project.PDFGenerator
 			return (TextStyleData)AddStyle().SetFontSize(fontSize);
 		}
 
+		public PDFTextData SetStyle(TextStyleData style)
+		{
+			style._parent = this;
+			this.style = style;
+			return this;
+		}
+
 		public override JObject GetExportData()
 		{
 			//style ??= new(this);

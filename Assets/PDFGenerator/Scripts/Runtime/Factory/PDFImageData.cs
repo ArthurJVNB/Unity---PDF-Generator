@@ -33,13 +33,6 @@ namespace Project.PDFGenerator
 			return style;
 		}
 
-		public PDFImageData AddStyle(ImageStyleData style)
-		{
-			style._parent = this;
-			this.style = style;
-			return this;
-		}
-
 		public ImageStyleData AddStyle(int width , int height, ImageDisplayType display = ImageStyleData.k_DefaultDisplayType)
 		{
 			return AddStyle().SetSize(width, height).SetDisplay(display);
@@ -48,6 +41,13 @@ namespace Project.PDFGenerator
 		public ImageStyleData AddStyle(int width, int height, int margin, bool marginAuto = ImageStyleData.k_DefaultMarginAuto, ImageDisplayType display = ImageStyleData.k_DefaultDisplayType)
 		{
 			return AddStyle(width, height, display).SetMargin(margin, marginAuto);
+		}
+
+		public PDFImageData SetStyle(ImageStyleData style)
+		{
+			style._parent = this;
+			this.style = style;
+			return this;
 		}
 
 		public override JObject GetExportData()
