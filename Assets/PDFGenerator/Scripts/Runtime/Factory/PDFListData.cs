@@ -16,6 +16,12 @@ namespace Project.PDFGenerator
 			type = PDFConstants.k_ListType;
 		}
 
+		public PDFListData SetId(string id)
+		{
+			this.id = id;
+			return this;
+		}
+
 		public PDFListData SetOrdered(bool ordered)
 		{
 			this.ordered = ordered;
@@ -28,6 +34,24 @@ namespace Project.PDFGenerator
 			return this;
 		}
 
+		public PDFListData AddItems(params string[] items)
+		{
+			this.items.AddRange(items);
+			return this;
+		}
+
+		public PDFListData SetItems(params string[] items)
+		{
+			this.items = new List<string>(items);
+			return this;
+		}
+
+		public PDFListData SetItems(List<string> items)
+		{
+			this.items = items;
+			return this;
+		}
+
 		public ListStyleData AddStyle()
 		{
 			style = new(this);
@@ -37,6 +61,13 @@ namespace Project.PDFGenerator
 		public ListStyleData AddStyle(int fontSize)
 		{
 			return AddStyle().SetFontSize(fontSize);
+		}
+
+		public PDFListData SetStyle(ListStyleData style)
+		{
+			style._parent = this;
+			this.style = style;
+			return this;
 		}
 
 		public override JObject GetExportData()

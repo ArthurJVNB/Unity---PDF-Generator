@@ -6,6 +6,7 @@ namespace Project.PDFGenerator
 	[Serializable]
 	public abstract class BasePDFData : IExportable<JObject>
 	{
+		public string id;
 		public string type;
 		internal PDFJObjectFactory factory;
 

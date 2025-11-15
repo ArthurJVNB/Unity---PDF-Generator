@@ -14,6 +14,12 @@ namespace Project.PDFGenerator
 			type = PDFConstants.k_TextType;
 		}
 
+		public PDFTextData SetId(string id)
+		{
+			this.id = id;
+			return this;
+		}
+
 		public PDFTextData SetText(string text)
 		{
 			this.text = text;
@@ -35,6 +41,13 @@ namespace Project.PDFGenerator
 		public TextStyleData AddStyle(int fontSize)
 		{
 			return (TextStyleData)AddStyle().SetFontSize(fontSize);
+		}
+
+		public PDFTextData SetStyle(TextStyleData style)
+		{
+			style._parent = this;
+			this.style = style;
+			return this;
 		}
 
 		public override JObject GetExportData()

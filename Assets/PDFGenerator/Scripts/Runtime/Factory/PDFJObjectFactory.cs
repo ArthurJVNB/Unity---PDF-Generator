@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 
@@ -34,6 +35,29 @@ namespace Project.PDFGenerator
 			page._parent = this;
 			_page = page;
 			_datas = new List<BasePDFData>();
+		}
+
+		public BasePDFData this[string id]
+		{
+			get { return GetById<BasePDFData>(id); }
+		}
+
+		public bool TryGetById<T>(string id, out T data) where T : BasePDFData
+		{
+			data = GetById<T>(id);
+			return data != null;
+		}
+
+		public T GetById<T>(string id) where T : BasePDFData
+		{
+			foreach (var data in _datas)
+			{
+				if (data.id == id && data is T typedData)
+				{
+					return typedData;
+				}
+			}
+			return null;
 		}
 
 		#region AddText

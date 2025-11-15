@@ -28,5 +28,28 @@ namespace Project.PDFGenerator.Tests
 				.GetExportData().ToString(Formatting.None);
 			Assert.AreEqual(expected, actual, "Expected: {0}\n  Received: {1}", expected, actual);
 		}
+
+		[Test]
+		public void TestId()
+		{
+			const string Id = "list_01";
+			var factory = PDFJObjectFactory.Start().Done().AddList().SetItems("Item 01", "Item 02").SetId(Id).Done();
+			Assert.IsTrue(factory.TryGetById(Id, out PDFListData _), $"Data with ID '{Id}' not found.");
+		}
+
+		[Test]
+		public void TestIdUpdateData()
+		{
+			const string Id = "image_01";
+			var factory = PDFJObjectFactory.Start(PageSize.A4, PageOrientation.Portrait).AddList().SetItems("Wrong Item 01", "Wrong Item 02").SetId(Id).Done();
+			var data = factory[Id] as PDFListData;
+			Assert.IsNotNull(data, $"Data with ID '{Id}' not found.");
+
+			string[] NewValues = new string[] { "Correct Item 01", "Correct Item 02" };
+			data.SetItems(NewValues);
+			Assert.AreEqual(NewValues.Length, data.items.Count, "List content was not updated correctly.");
+			for (int i = 0; i < data.items.Count; i++)
+				Assert.AreEqual(NewValues[i], data.items[i], "List content was not updated correctly.");
+		}
 	}
 }

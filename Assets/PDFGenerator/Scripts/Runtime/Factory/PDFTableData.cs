@@ -23,6 +23,12 @@ namespace Project.PDFGenerator
 			rowStyle = new(this);
 		}
 
+		public PDFTableData SetId(string id)
+		{
+			this.id = id;
+			return this;
+		}
+
 		public PDFTableData SetHeader(List<string> header)
 		{
 			this.header = header;
@@ -32,6 +38,18 @@ namespace Project.PDFGenerator
 		public PDFTableData SetHeader(params string[] header)
 		{
 			return SetHeader(new List<string>(header));
+		}
+
+		public PDFTableData AddHeader(string header)
+		{
+			this.header.Add(header);
+			return this;
+		}
+
+		public PDFTextData AddHeaders(params string[] headers)
+		{
+			header.AddRange(headers);
+			return null;
 		}
 
 		public PDFTableData AddRow(List<string> row)
@@ -55,9 +73,23 @@ namespace Project.PDFGenerator
 			return style.SetFontSize(fontSize);
 		}
 
+		public PDFTableData SetStyle(TableStyleData style)
+		{
+			style._parent = this;
+			this.style = style;
+			return this;
+		}
+
 		public TableHeaderStyleData AddHeaderStyle()
 		{
 			return headerStyle;
+		}
+
+		public PDFTableData SetHeaderStyle(TableHeaderStyleData headerStyle)
+		{
+			headerStyle._parent = this;
+			this.headerStyle = headerStyle;
+			return this;
 		}
 
 		public TableCellStyleData AddCellStyle()
@@ -65,9 +97,23 @@ namespace Project.PDFGenerator
 			return cellStyle;
 		}
 
+		public PDFTableData SetCellStyle(TableCellStyleData cellStyle)
+		{
+			cellStyle._parent = this;
+			this.cellStyle = cellStyle;
+			return this;
+		}
+
 		public TableRowStyleData AddRowStyle()
 		{
 			return rowStyle;
+		}
+
+		public PDFTableData SetRowStyle(TableRowStyleData rowStyle)
+		{
+			rowStyle._parent = this;
+			this.rowStyle = rowStyle;
+			return this;
 		}
 
 		public override JObject GetExportData()

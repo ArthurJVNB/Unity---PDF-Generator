@@ -2,7 +2,7 @@ namespace Project.PDFGenerator
 {
 	public static class PDFConstants
 	{
-		public const string k_Version = "1.0.0";
+		public const string k_Version = "1.0.1";
 
 		public const string k_TextType = "text";
 		public const string k_ImageType = "image";

@@ -58,5 +58,26 @@ namespace Project.PDFGenerator.Tests
 			var actual = new PDFTextData(null).SetType(TextType.Paragraph).SetText("Text without style").GetExportData().ToString(Formatting.None);
 			Assert.AreEqual(expected, actual, "Expected: {0}\n  Received: {1}", expected, actual);
 		}
+
+		[Test]
+		public void TestId()
+		{
+			const string Id = "text_01";
+			var factory = PDFJObjectFactory.Start(PageSize.A4, PageOrientation.Portrait).AddText("Sample Text").SetId(Id).Done();
+			Assert.IsTrue(factory.TryGetById(Id, out PDFTextData _), $"Data with ID '{Id}' not found.");
+		}
+
+		[Test]
+		public void TestIdUpdateData()
+		{
+			const string Id = "text_01";
+			var factory = PDFJObjectFactory.Start(PageSize.A4, PageOrientation.Portrait).AddText("Sample Text").SetId(Id).Done();
+			var data = factory[Id] as PDFTextData;
+			Assert.IsNotNull(data, $"Data with ID '{Id}' not found.");
+
+			const string NewValue = "Updated Text";
+			data.SetText(NewValue);
+			Assert.AreEqual(NewValue, data.text, "Text content was not updated correctly.");
+		}
 	}
 }
